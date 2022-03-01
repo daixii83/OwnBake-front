@@ -25,7 +25,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build
+          npm run build-linux
         env:
           VUE_APP_API: ${{ secrets.VUE_APP_API }}
       # 步驟三：部署
