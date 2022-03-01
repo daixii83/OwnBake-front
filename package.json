@@ -9,10 +9,7 @@
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && quasar dev",
-    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && quasar build",
-    "serve-linux": "export SET NODE_OPTIONS=--openssl-legacy-provider; vue-cli-service serve",
-    "build-linux": "export SET NODE_OPTIONS=--openssl-legacy-provider; vue-cli-service build",
-    "lint-linux": "export SET NODE_OPTIONS=--openssl-legacy-provider; vue-cli-service lint"
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && quasar build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
