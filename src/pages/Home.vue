@@ -12,10 +12,10 @@
         transition-next="slide-left"
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
-        height="600px"
+        height="500px"
       >
-        <q-carousel-slide :name="1" img-src="../assets/shutterstock_1063718882.jpg" />
-        <q-carousel-slide :name="2" img-src="../assets/shutterstock_1104685310.jpg" />
+        <q-carousel-slide :name="1" img-src="../assets/small-size/banner1.png" />
+        <q-carousel-slide :name="2" img-src="../assets/small-size/banner2.png" />
         <q-carousel-slide :name="3" img-src="../assets/shutterstock_146022917_1.jpg" />
         <q-carousel-slide :name="4" img-src="../assets/shutterstock_1544262284.jpg" />
       </q-carousel>
