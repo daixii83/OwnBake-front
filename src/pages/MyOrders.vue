@@ -88,7 +88,7 @@ export default {
     this.form = { ...this.products[index], image: null, index }
     this.$q.dialog({
       title: '',
-      component: dialogEditProducts,
+      // component: dialogEditProducts,
 
       // optional if you want to have access to
       // Router, Vuex store, and so on, in your
