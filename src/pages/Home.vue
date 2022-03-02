@@ -23,8 +23,8 @@
 
     <div id="section2" align="center" class="bg-accent">
       <div class="col-12 q-pt-md text-h5">今天想做點什麼呢？</div>
-      <div class="row no-wrap q-ma-none q-pa-md row items-start q-gutter-md">
-        <div class="col-md-3">
+      <div class="row q-ma-none q-pa-md row items-start q-gutter-md">
+        <div class="col-12 col-md-3">
         <q-card flat class="my-card">
           <q-img height="250px" :contain="true" src="../assets/cake.png">
           </q-img>
@@ -34,7 +34,7 @@
           </q-card-actions>
         </q-card>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-md-3">
         <q-card flat class="my-card">
           <q-img height="250px" :contain="true" src="../assets/cookie.png">
           </q-img>
@@ -44,7 +44,7 @@
           </q-card-actions>
         </q-card>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-md-3">
         <q-card flat class="my-card">
           <q-img height="250px" :contain="true" src="../assets/tart.png">
           </q-img>
@@ -54,7 +54,7 @@
           </q-card-actions>
         </q-card>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-md-3">
         <q-card flat class="my-card">
           <q-img height="250px" :contain="true" src="../assets/puff.png">
           </q-img>

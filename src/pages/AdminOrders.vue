@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-xl bg-white">
     <q-table
-      title="我的訂單"
+      title="訂單總表"
       :data="orders"
       :columns="columns"
       row-key="name"
@@ -18,9 +18,8 @@
               <div v-if="props.row.order.orderStatus === false" > 待處理 </div>
               <div v-if="props.row.order.orderStatus === true" > 已完成 </div>
             </q-td>
-            <q-td key="orderPrice" :props="props">{{ total }}</q-td>
-            <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td>
-            <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td>
+            <q-td key="orderRecipient" :props="props">{{ props.row.order.recipient }}</q-td>
+            <q-td key="orderTotal" :props="props">{{ total }}</q-td>
             <q-td key="editOrDelete">
               <div class="row">
                 <div align="center" class="col-12 q-gutter-md">
@@ -52,6 +51,8 @@ const columns = [
   { name: 'orderDate', align: 'left', label: '訂購日期', field: 'orderDate' },
   { name: 'orderInfo', align: 'center', label: '訂單詳細', field: 'orderInfo' },
   { name: 'orderStatus', align: 'center', label: '訂單狀態', field: 'orderStatus' },
+  { name: 'orderRecipient', align: 'center', label: '訂購人', field: 'orderRecipient' },
+  { name: 'orderTotal', align: 'center', label: '總金額', field: 'orderRecipient' },
   { name: 'editOrDelete', align: 'center', label: '操作', field: 'editOrDelete' }
 ]
 
@@ -64,7 +65,7 @@ export default {
   },
   methods: {
     orderInfo (index) {
-      this.order = { ...this.orders[index], index }
+      this.order = { ...this.orders[index] }
       console.log(this.order)
       this.$q.dialog({
         title: '',

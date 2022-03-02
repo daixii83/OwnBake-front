@@ -50,7 +50,7 @@
                         <img :src="props.row.product.productImage" class="text-center" style="width: 100px; max-height: 100px;">
                       </q-td>
                       <q-td key="productPrice" :props="props">{{ props.row.product.productPrice }}</q-td>
-                      <q-td key="quantity" :props="props">
+                      <q-td key="quantity" :props="props" class="justify-center">
                         <q-input
                         ref="num"
                         rounded outlined
@@ -394,10 +394,10 @@
                         </q-td>
                         <q-td key="productPrice" :props="props">{{ props.row.product.productPrice }}</q-td>
                         <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
-                        <q-td key="subtotal" :props="props">{{ total }}</q-td>
                       </q-tr>
                     </template>
                   </q-table>
+                  <div>總金額：{{ total }}</div>
                 </div>
               </div>
             </div>
@@ -455,7 +455,6 @@ const columns = [
   { name: 'productImage', align: 'center', label: '商品圖片', field: 'product.productImage' },
   { name: 'productPrice', align: 'center', label: '價格', field: 'product.productPrice' },
   { name: 'quantity', align: 'center', label: '數量', field: 'quantity' },
-  { name: 'subtotal', align: 'center', label: '小計', field: 'subtotal' },
   { name: 'delete', align: 'center', label: '刪除', field: 'delete' }
 ]
 const columns1 = [
@@ -471,8 +470,7 @@ const columns1 = [
   { name: 'productName', align: 'left', label: '商品名稱', field: 'product.productName' },
   { name: 'productImage', align: 'center', label: '商品圖片', field: 'product.productImage' },
   { name: 'productPrice', align: 'center', label: '價格', field: 'product.productPrice' },
-  { name: 'quantity', align: 'center', label: '數量', field: 'quantity' },
-  { name: 'subtotal', align: 'center', label: '小計', field: 'subtotal' }
+  { name: 'quantity', align: 'center', label: '數量', field: 'quantity' }
 ]
 
 export default {
@@ -511,8 +509,7 @@ export default {
         cardCSC: '',
         receipt: '',
         receiptCarrier: '',
-        orderStatus: false,
-        total: ''
+        orderStatus: false
       }
     }
   },
@@ -559,6 +556,7 @@ export default {
           }
         })
         console.log(this.order)
+        this.$router.push('/Member/MyOrders')
         this.$q.dialog({
         // component: dialogSuccess,
           parent: this,
@@ -571,7 +569,6 @@ export default {
         }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
         })
-        this.$router.push('/Member/MyOrders')
       } catch (error) {
         console.log(error)
         this.$q.dialog({
@@ -606,17 +603,21 @@ export default {
     user () {
       return this.$store.getters['user/user']
     },
-    total: {
-      get () {
-        return this.products.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue.quantity * currentValue.product.productPrice
-        }, 0)
-      },
-      set (currentValue) {
-        this.total = currentValue
-      }
-
+    total () {
+      return this.products.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.quantity * currentValue.product.productPrice
+      }, 0)
     }
+    // total: {
+    //   get () {
+    //     return this.products.reduce((accumulator, currentValue) => {
+    //       return accumulator + currentValue.quantity * currentValue.product.productPrice
+    //     }, 0)
+    //   },
+    //   set (currentValue) {
+    //     this.total = currentValue
+    //   }
+    // }
   },
   async created () {
     try {

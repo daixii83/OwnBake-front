@@ -1,32 +1,76 @@
 <template>
   <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin bg-accent" style="max-width: 1500px;max-height: 1000px; width:1000px;height:650px">
-      <q-card-section>
-        <q-table
-        title="訂單詳細"
-        :data="order"
-        :columns="columns1"
-        row-key="name"
-        binary-state-sort
-        ref="table"
-        style="width: 100%; max-width:1500px;"
-        flat
-        >
-          <template v-slot:body="props">
-            <q-tr :props="props">
-              <q-td key="productCategories" :props="props">{{ order._id }}</q-td>
-              <q-td key="productName" :props="props">{{ props.row.product.productName }}</q-td>
-              <q-td key="productImage" :props="props">
-                <img :src="props.row.product.productImage" class="text-center" style="width: 100px; max-height: 100px;">
-              </q-td>
-              <q-td key="productPrice" :props="props">{{ props.row.product.productPrice }}</q-td>
-              <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
-              <q-td key="subtotal" :props="props">{{ total }}</q-td>
-            </q-tr>
-          </template>
-        </q-table>
-      </q-card-section>
-      <!-- buttons example -->
+    <q-card class="q-dialog-plugin bg-accent q-pa-md" style="max-width: 1500px;max-height: 1000px; width:1000px;height:650px">
+      <div class="row q-pa-md bg-dark text-white">
+        <div class="col-4">訂單號碼： {{ orders._id }}</div>
+        <div class="col-4">訂購日期： {{ orders.date }}</div>
+        <div class="col-4">
+          訂單狀態：<div class="div" v-if="orders.order.orderStatus === true">已完成</div><div class="div" v-if="orders.order.orderStatus === false">待出貨</div>
+        </div>
+      </div>
+      <div class="row bg-primary text-white q-py-md">
+        <div align="center" class="col-3">商品圖片</div>
+        <div align="center" class="col-3">商品名稱</div>
+        <div align="center" class="col-3">數量</div>
+        <div align="center" class="col-3">價格</div>
+      </div>
+      <div class="row items-center q-pa-md" v-for="product in orders.products" :key="product.id">
+        <div align="center" class="col-3">
+            <img :src="product.product.productImage" class="text-center" style="width: 100px; max-height: 100px;">
+        </div>
+        <div align="center" class="col-3">{{ product.product.productName }}</div>
+        <div align="center" class="col-3">{{ product.quantity }}</div>
+        <div align="center" class="col-3">{{ product.product.productPrice }}</div>
+      </div>
+      <div class="row q-pa-md bg-primary text-white">
+        <div class="col-12">
+          寄送方式：{{ orders.order.delivery }}
+        </div>
+      </div>
+      <div class="row q-pa-md">
+        <div class="col-2">
+          <div>
+            寄件人姓名：
+          </div>
+          <div>
+            手機號碼：
+          </div>
+          <div>
+            email：
+          </div>
+          <div>
+            寄送地址：
+          </div>
+          <div>
+            備註：
+          </div>
+        </div>
+        <div class="col-10">
+          <div>
+            {{ orders.order.recipient }}
+          </div>
+          <div>
+            {{ orders.order.mobile }}
+          </div>
+          <div>
+            {{ orders.order.mobile }}
+          </div>
+          <div>
+            {{ orders.order.address }}
+          </div>
+          <div>
+            {{ orders.order.remark }}
+          </div>
+        </div>
+      </div>
+      <div class="row q-pa-md bg-primary text-white">
+        <div class="col-6">
+          付款方式：{{ orders.order.pay }}
+        </div>
+        <div class="col-6">
+          發票寄送方式：{{ orders.order.pay }}
+        </div>
+      </div>
       <q-card-actions align="right">
         <q-btn color="primary" label="關閉" @click="hide" />
       </q-card-actions>
@@ -38,27 +82,15 @@
 </style>
 
 <script>
-const columns1 = [
-  {
-    name: 'productCategories',
-    required: true,
-    label: '商品種類',
-    align: 'left',
-    field: row => row.product.productCategories,
-    format: val => `${val}`,
-    sortable: true
-  },
-  { name: 'productName', align: 'left', label: '商品名稱', field: 'product.productName' },
-  { name: 'productImage', align: 'center', label: '商品圖片', field: 'product.productImage' },
-  { name: 'productPrice', align: 'center', label: '價格', field: 'product.productPrice' },
-  { name: 'quantity', align: 'center', label: '數量', field: 'quantity' },
-  { name: 'subtotal', align: 'center', label: '小計', field: 'subtotal' }
-]
 export default {
+  props: {
+    orderInfo: {
+      type: Object
+    }
+  },
   data () {
     return {
-      columns1,
-      orders: []
+      orders: {}
     }
   },
 
@@ -92,7 +124,7 @@ export default {
   computed: {
   },
   async created () {
-    this.order = this.orders
+    this.orders = this.orderInfo
   }
 }
 </script>
