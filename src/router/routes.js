@@ -10,7 +10,7 @@ const routes = [
       { path: 'Products', component: () => import('pages/Products.vue'), meta: { title: 'OwnBake | 商品主頁' } },
       { path: 'ProductInfo/:id', component: () => import('pages/ProductInfo.vue'), meta: { title: 'OwnBake | 商品介紹' } },
       { path: 'Reservation', component: () => import('pages/Reservation.vue'), meta: { login: true, title: 'OwnBake | 預約體驗' } },
-      { path: 'Forum', component: () => import('pages/Forum.vue'), meta: { title: 'OwnBake | 討論區' } },
+      // { path: 'Forum', component: () => import('pages/Forum.vue'), meta: { title: 'OwnBake | 討論區' } },
       { path: 'ContactUs', component: () => import('pages/ContactUs.vue'), meta: { title: 'OwnBake | 聯絡我們' } },
       { path: 'Login', component: () => import('pages/Login.vue'), meta: { title: 'OwnBake | 會員登入' } },
       { path: 'Register', component: () => import('pages/Register.vue'), meta: { title: 'OwnBake | 會員註冊' } },
@@ -22,8 +22,8 @@ const routes = [
         meta: { login: true, title: 'OwnBake | 基本資料' },
         children: [
           { path: 'MyOrders', component: () => import('pages/MyOrders.vue'), meta: { login: true, title: 'OwnBake | 我的訂單' } },
-          { path: 'MyReservations', component: () => import('pages/MyReservations.vue'), meta: { login: true, title: 'OwnBake | 我的預約' } },
-          { path: 'MyArticles', component: () => import('pages/MyArticles.vue'), meta: { login: true, title: 'OwnBake | 我的文章' } }
+          { path: 'MyReservations', component: () => import('pages/MyReservations.vue'), meta: { login: true, title: 'OwnBake | 我的預約' } }
+          // { path: 'MyArticles', component: () => import('pages/MyArticles.vue'), meta: { login: true, title: 'OwnBake | 我的文章' } }
         ]
       }
     ]
@@ -40,9 +40,9 @@ const routes = [
         children: [
           { path: 'AdminProducts', component: () => import('pages/AdminProducts.vue'), meta: { login: true, admin: true, title: 'OwnBake | 商品管理' } },
           { path: 'AdminOrders', component: () => import('pages/AdminOrders.vue'), meta: { login: true, admin: true, title: 'OwnBake | 訂單管理' } },
-          { path: 'AdminReservations', component: () => import('pages/AdminReservations.vue'), meta: { login: true, admin: true, title: 'OwnBake | 預約管理' } },
-          { path: 'AdminArticles', component: () => import('pages/AdminArticles.vue'), meta: { login: true, admin: true, title: 'OwnBake | 文章管理' } },
-          { path: 'AdminMembers', component: () => import('pages/AdminMembers.vue'), meta: { login: true, admin: true, title: 'OwnBake | 會員介面' } }
+          { path: 'AdminReservations', component: () => import('pages/AdminReservations.vue'), meta: { login: true, admin: true, title: 'OwnBake | 預約管理' } }
+          // { path: 'AdminArticles', component: () => import('pages/AdminArticles.vue'), meta: { login: true, admin: true, title: 'OwnBake | 文章管理' } },
+          // // { path: 'AdminMembers', component: () => import('pages/AdminMembers.vue'), meta: { login: true, admin: true, title: 'OwnBake | 會員介面' } }
         ]
       }
     ]

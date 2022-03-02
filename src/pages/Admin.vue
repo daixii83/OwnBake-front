@@ -26,8 +26,8 @@
           <q-route-tab to="/Admin/AdminProducts" name="AdminProducts" label="商品管理" />
           <q-route-tab to="/Admin/AdminOrders" name="AdminOrders" label="訂單管理" />
           <q-route-tab to="/Admin/AdminReservations" name="AdminReservations" label="預約管理" />
-          <q-route-tab to="/Admin/AdminArticles" name="AdminArticles" label="文章管理" />
-          <q-route-tab to="/Admin/AdminMembers" name="AdminMembers" label="會員管理" />
+          <!-- <q-route-tab to="/Admin/AdminArticles" name="AdminArticles" label="文章管理" /> -->
+          <!-- <q-route-tab to="/Admin/AdminMembers" name="AdminMembers" label="會員管理" /> -->
         </q-tabs>
         <q-separator />
         <q-tab-panels v-model="panel" animated class="text-brown">
@@ -40,12 +40,12 @@
           <q-tab-panel name="AdminReservations">
             <router-view />
           </q-tab-panel>
-          <q-tab-panel name="AdminArticles">
-            <router-view />
-          </q-tab-panel>
-          <q-tab-panel name="AdminMembers">
-            <router-view />
-          </q-tab-panel>
+          <!-- <q-tab-panel name="AdminArticles"> -->
+            <!-- <router-view /> -->
+          <!-- </q-tab-panel> -->
+          <!-- <q-tab-panel name="AdminMembers"> -->
+            <!-- <router-view /> -->
+          <!-- </q-tab-panel> -->
         </q-tab-panels>
       </q-card>
     </div>

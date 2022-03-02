@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fff" class="bg-primary my-font">
     <q-header reveal height-hint="98">
-      <div>
+      <div class="row">
         <q-toolbar class="bg-primary text-white shadow-2" flat>
           <q-space/>
           <!--
@@ -12,8 +12,13 @@
             <q-route-tab to="/AboutUs" label="關於我們" />
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
-            <q-btn flat to="/Home" label="OwnBake" />
-            <q-route-tab to="/Forum" label="討論區" />
+            <q-btn flat to="/Home" label="OwnBake" class="justify-center" >
+              <!-- <q-img -->
+                <!-- src="../assets/logo.png" -->
+                <!-- basic -->
+              <!-- ></q-img> -->
+            </q-btn>
+            <!-- <q-route-tab to="/Forum" label="討論區" /> -->
             <q-route-tab to="/ContactUs" label="聯絡我們" />
             <q-route-tab v-if="user.isLogin" to="/Member" label="會員專區" />
             <q-route-tab v-if="user.isAdmin" to="/Admin" label="管理者專區" />

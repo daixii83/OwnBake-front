@@ -17,10 +17,10 @@
         <div align="center" class="col-md-1"></div>
         <div align="center" class="col-md-5">
           <q-img
-            src="../assets/oven (1).png"
+            src="../assets/logo.png"
             style="max-width: 350px"
           />
-          <div id="AboutOwnBake" class="text-h2 text-bold">OwnBake</div>
+          <div id="AboutOwnBake" class="text-h2 text-bold"></div>
         </div>
         <div align="center" class="col-md-5 flex column justify-center">
           <div class="q-pb-md text-h3 text-bold">關於OwnBake</div>

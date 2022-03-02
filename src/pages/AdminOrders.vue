@@ -23,7 +23,7 @@
             <q-td key="editOrDelete">
               <div class="row">
                 <div align="center" class="col-12 q-gutter-md">
-                  <q-btn size="0.7rem" class="bg-white bubble" >完成訂單</q-btn>
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="completedOrder(props.pageIndex)">完成訂單</q-btn>
                   <q-btn size="0.7rem" class="bg-white bubble">刪除訂單</q-btn>
                 </div>
               </div>
@@ -91,6 +91,32 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    },
+    async completedOrder (index) {
+      this.order = { ...this.orders[index] }
+      console.log(this.orders)
+      try {
+        const { data } = await this.api.patch('/orders' + this.order._id + this.order.user._id, { orderStatus: true }, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        console.log(data.result)
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+        // component: dialogSuccess,
+          parent: this,
+          title: '失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
     }
   },
   async created () {

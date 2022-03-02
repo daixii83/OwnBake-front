@@ -14,7 +14,7 @@
         <div align="center" class="col-3">數量</div>
         <div align="center" class="col-3">價格</div>
       </div>
-      <div class="row items-center q-pa-md" v-for="product in orders.products" :key="product.id">
+      <div class="row items-center q-pa-md bg-white" v-for="product in orders.products" :key="product.id">
         <div align="center" class="col-3">
             <img :src="product.product.productImage" class="text-center" style="width: 100px; max-height: 100px;">
         </div>
@@ -45,7 +45,7 @@
             備註：
           </div>
         </div>
-        <div class="col-10">
+        <div class="col-10 text-dark">
           <div>
             {{ orders.order.recipient }}
           </div>
@@ -68,7 +68,14 @@
           付款方式：{{ orders.order.pay }}
         </div>
         <div class="col-6">
-          發票寄送方式：{{ orders.order.pay }}
+          發票寄送方式：{{ orders.order.receiptCarrier }}
+        </div>
+      </div>
+      <div class="row q-pa-md text-dark bg-white">
+        <div class="col-6">
+        </div>
+        <div class="col-6" v-if="orders.order.receiptCarrier === '手機條碼'">
+          手機條碼：{{ orders.order.code }}
         </div>
       </div>
       <q-card-actions align="right">

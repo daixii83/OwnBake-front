@@ -1,40 +1,21 @@
 <template>
-  <div>
-    <q-splitter
-      v-model="splitterModel"
-      style="height: 450px"
-    >
-
-      <template v-slot:before>
-        <div align="center" class="q-pa-md" :reservations="reservations">
-          <q-date
-            v-model="date"
-            :events="events"
-            event-color="orange"
-          />
-        </div>
-      </template>
-
-      <template v-slot:after>
-        <q-tab-panels
-          v-model="date"
-          animated
-          transition-prev="jump-up"
-          transition-next="jump-up"
-        >
-          <q-tab-panel name="2019/02/01">
-            <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="reservation in reservations" :key="reservation._id">
-              {{ reservation.reservation.date }}
-              <reservationCard :reservation="reservation"></reservationCard>
-            </div>
-          </q-tab-panel>
-        </q-tab-panels>
-      </template>
-    </q-splitter>
+  <div class="row">
+    <div class="col-12">
+      以下是您的預約：
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="reservation in filters" :key="reservation._id">
+      <reservationCard :reservation="reservation"></reservationCard>
+    </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
+  .bubble
+    border-radius: 30px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
 </style>
 
 <script>
@@ -47,10 +28,18 @@ export default {
   },
   data () {
     return {
-      splitterModel: 50, // start at 50%
-      date: '2019/02/01',
-      events: ['2019/02/01', '2019/02/05', '2019/02/06'],
+      splitterModel: 30, // start at 50%
+      date: '2022/03/03',
+      events: ['2022/03/03', '2022/03/04', '2022/03/06', '2022/03/08', '2022/03/10'],
       reservations: []
+    }
+  },
+  computed: {
+    filters () {
+      return this.reservations.filter(item => {
+        if (this.filter === '') return true
+        return item.date === this.filter
+      })
     }
   },
   async created () {

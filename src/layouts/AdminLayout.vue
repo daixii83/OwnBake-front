@@ -13,7 +13,7 @@
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
             <q-btn flat to="/Home" label="OwnBake" />
-            <q-route-tab to="/Forum" label="討論區" />
+            <!-- <q-route-tab to="/Forum" label="討論區" /> -->
             <q-route-tab to="/ContactUs" label="聯絡我們" />
             <q-route-tab v-if="user.isLogin && user.isAdmin" to="/Admin" label="管理者介面" />
           </q-tabs>

@@ -174,7 +174,7 @@
                     type="text"
                     v-model="order.email"
                     lazy-rules
-                    :rules="[ val => val && val.length > 0 || '請輸入email']"
+                    :rules="[val => !!val || '請輸入email', isValidEmail]"
                   />
                 </div>
                 <div class="col-1"></div>
@@ -218,9 +218,9 @@
                   <q-input
                     outlined
                     v-model="order.card"
-                    mask="#### #### #### ####"
-                    fill-mask="#"
-                    :rules="[ val => val && val.length > 0 && val !== Number || '請輸入信用卡號']"
+                    mask="#### - #### - #### - ####"
+                    fill-mask
+                    :rules="[ val => val && val.length >= 0 || '請輸入信用卡號']"
                   />
                 </div>
                 <div class="col-1"></div>
@@ -232,7 +232,7 @@
                   <q-input
                     outlined
                     v-model="order.cardHolder"
-                    :rules="[ val => val && val.length > 0 || '請輸入持卡人姓名']"
+                    :rules="[ val => val && val.length >= 0 || '請輸入持卡人姓名']"
                   />
                 </div>
                 <div class="col-1"></div>
@@ -246,9 +246,9 @@
                       <q-input
                         outlined
                         v-model="order.cardExpiry"
-                        :rules="[ val => val && val.length > 0 && val !== Number || '請輸入有效期限']"
+                        :rules="[ val => val && val.length >= 0 && val !== Number || '請輸入有效期限']"
                         mask="##/##"
-                        fill-mask="#"
+                        fill-mask
                       />
                     </div>
                   </div>
@@ -261,9 +261,9 @@
                       <q-input
                         outlined
                         v-model="order.cardCSC"
-                        :rules="[ val => val && val.length > 0 && val !== Number || '請輸入安全碼']"
+                        :rules="[ val => val && val.length >= 0 || '請輸入安全碼']"
                         mask="###"
-                        fill-mask="#"
+                        fill-mask
                       />
                     </div>
                     <div class="col-1"></div>
@@ -308,6 +308,29 @@
                 </div>
                 <div class="col-1"></div>
               </div>
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-5">
+                  <div class="row items-center">
+                  </div>
+                </div>
+                <div class="col-5" v-if="order.receiptCarrier === '手機條碼'">
+                  <div class="row items-center">
+                    <div align="right" class="col-6 text-body1 q-pr-md">
+                      手機條碼：
+                    </div>
+                    <div align="left" class="col-6 q-pt-md">
+                      <q-input
+                        outlined
+                        v-model="order.code"
+                        mask="/XXXXXXX"
+                        fill-mask
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1"></div>
+              </div>
             </div>
           </div>
 
@@ -329,7 +352,7 @@
           icon="add_comment"
           :done="done3"
         >
-          <div class="row q-pt-md q-pb-md text-normal">
+          <div class="row q-pt-md q-pb-md text-normal text-dark">
             <div align="center" class="col-12 q-pt-md  text-h6">請確認訂單資訊是否正確</div>
             <div align="center" class="col-12 q-pb-xl text-normal text-grey">如需修改可點選上方步驟返回</div>
             <div align="center" class="col-12 q-gutter-y-md text-normal">
@@ -371,6 +394,14 @@
                   <div class="text-body1"> {{ order.cardHolder }} </div>
                   <div class="text-body1"> {{ order.cardExpiry }} </div>
                   <div class="text-body1"> {{ order.cardCSC }} </div>
+                </div>
+              </div>
+              <div align="center" class="row text-h6 text-bold">
+                <div class="col-12">
+                  發票寄送方式： {{ order.receipt }}
+                  <div v-if="order.receiptCarrier === '手機條碼'" class="text-body1">
+                    手機條碼： {{ order.code }}
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -509,7 +540,9 @@ export default {
         cardCSC: '',
         receipt: '',
         receiptCarrier: '',
-        orderStatus: false
+        code: '',
+        orderStatus: false,
+        cancelStatus: false
       }
     }
   },

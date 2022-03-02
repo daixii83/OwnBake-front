@@ -14,6 +14,7 @@
             <q-td key="productPrice" :props="props">
               <div v-if="props.row.order.orderStatus === false" > 處理中 </div>
               <div v-if="props.row.order.orderStatus === true" > 已出貨 </div>
+              <div v-if="props.row.order.cancelStatus === true" > 已取消 </div>
             </q-td>
             <q-td key="productSell" :props="props">
               {{ props.row.productSell }}
@@ -38,7 +39,7 @@
 </style>
 
 <script>
-
+import orderDialog from '../components/orderDialog.vue'
 const columns = [
   {
     name: 'productCategories',
@@ -58,6 +59,36 @@ export default {
     return {
       columns,
       orders: []
+    }
+  },
+  methods: {
+    orderInfo (index) {
+      this.order = { ...this.orders[index] }
+      console.log(this.order)
+      this.$q.dialog({
+        title: '',
+        component: orderDialog,
+
+        // optional if you want to have access to
+        // Router, Vuex store, and so on, in your
+        // custom component:
+        parent: this, // becomes child of this Vue node
+        // ("this" points to your Vue component)
+        // (prop was called "root" in < 1.1.0 and
+        // still works, but recommending to switch
+        // to the more appropriate "parent" name)
+
+        // props forwarded to component
+        // (everything except "component" and "parent" props above):
+        orderInfo: this.order
+      // ...more.props...
+      }).onOk(() => {
+        console.log('OK')
+      }).onCancel(() => {
+        console.log('Cancel')
+      }).onDismiss(() => {
+        console.log('Called on OK or Cancel')
+      })
     }
   },
   async created () {
@@ -83,33 +114,6 @@ export default {
         // console.log('I am triggered on both OK and Cancel')
       })
     }
-  },
-  editProduct (index) {
-    this.form = { ...this.products[index], image: null, index }
-    this.$q.dialog({
-      title: '',
-      // component: dialogEditProducts,
-
-      // optional if you want to have access to
-      // Router, Vuex store, and so on, in your
-      // custom component:
-      parent: this, // becomes child of this Vue node
-      // ("this" points to your Vue component)
-      // (prop was called "root" in < 1.1.0 and
-      // still works, but recommending to switch
-      // to the more appropriate "parent" name)
-
-      // props forwarded to component
-      // (everything except "component" and "parent" props above):
-      product: this.form
-      // ...more.props...
-    }).onOk(() => {
-      console.log('OK')
-    }).onCancel(() => {
-      console.log('Cancel')
-    }).onDismiss(() => {
-      console.log('Called on OK or Cancel')
-    })
   }
 }
 </script>
