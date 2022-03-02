@@ -63,7 +63,7 @@
                         />
                       </q-td>
                       <q-td key="subtotal" :props="props">
-                        {{ subtotal }}
+                        {{ total }}
                         <!-- <p v-if="props.row.productSell = true">上架中</p> -->
                         <!-- <p v-if="props.row.productSell = false">未上架</p> -->
                       </q-td>
@@ -394,7 +394,7 @@
                         </q-td>
                         <q-td key="productPrice" :props="props">{{ props.row.product.productPrice }}</q-td>
                         <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
-                        <q-td key="subtotal" :props="props">{{ subtotal }}</q-td>
+                        <q-td key="subtotal" :props="props">{{ total }}</q-td>
                       </q-tr>
                     </template>
                   </q-table>
@@ -510,7 +510,9 @@ export default {
         cardExpiry: '',
         cardCSC: '',
         receipt: '',
-        receiptCarrier: ''
+        receiptCarrier: '',
+        orderStatus: false,
+        total: ''
       }
     }
   },
@@ -557,7 +559,19 @@ export default {
           }
         })
         console.log(this.order)
-        // this.$router.push('/Member/MyOrders')
+        this.$q.dialog({
+        // component: dialogSuccess,
+          parent: this,
+          title: '成功',
+          message: '結帳成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+        this.$router.push('/Member/MyOrders')
       } catch (error) {
         console.log(error)
         this.$q.dialog({
@@ -592,15 +606,16 @@ export default {
     user () {
       return this.$store.getters['user/user']
     },
-    subtotal (pageIndex) {
-      return this.products.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.quantity * currentValue.product.productPrice
-      }, 0)
-    },
-    total () {
-      return this.products.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.quantity * currentValue.product.productPrice
-      }, 0)
+    total: {
+      get () {
+        return this.products.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.quantity * currentValue.product.productPrice
+        }, 0)
+      },
+      set (currentValue) {
+        this.total = currentValue
+      }
+
     }
   },
   async created () {
