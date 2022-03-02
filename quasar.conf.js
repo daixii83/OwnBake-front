@@ -74,7 +74,7 @@ module.exports = function (/* ctx */) {
           .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
       },
       env: {
-        VUE_APP_API: env.VUE_APP_API || process.env.VUE_APP_API
+        VUE_APP_API: env?.VUE_APP_API || process.env.VUE_APP_API
       }
     },
 
