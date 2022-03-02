@@ -35,28 +35,49 @@
               <div align="center" class="col-md-6">
                 <div class="q-py-md text-h6">請選擇日期</div>
                 <q-date
-                  v-model="date"
-                  navigation-min-year-month="2022/02"
-                  navigation-max-year-month="2022/03"
+                  v-model="reservation.date"
+                  navigation-min-year-month="2022/03"
+                  navigation-max-year-month="2022/04"
                 />
               </div>
               <div class="col-md-6">
                 <div class="q-pa-md text-h6">請選擇時間</div>
                 <div class="row q-gutter-md">
                   <div class="col-12 q-gutter-x-md">
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">10：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">11：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">12：00</q-btn>
+                    <q-btn-toggle
+                      v-model="reservation.time"
+                      toggle-color="primary"
+                      @click="reservation.time === value"
+                      :options="[
+                        {label: '10:00', value: '10:00'},
+                        {label: '11:00', value: '11:00'},
+                        {label: '12:00', value: '12:00'}
+                      ]"
+                    />
                   </div>
                   <div class="col-12 q-gutter-x-md">
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">13：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">14：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">15：00</q-btn>
+                    <q-btn-toggle
+                      v-model="reservation.time"
+                      toggle-color="primary"
+                      @click="reservation.time === value"
+                      :options="[
+                        {label: '13:00', value: '13:00'},
+                        {label: '14:00', value: '14:00'},
+                        {label: '15:00', value: '15:00'}
+                      ]"
+                    />
                   </div>
                   <div class="col-12 q-gutter-x-md">
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">16：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">17：00</q-btn>
-                    <q-btn size="1rem" class="bg-white q-px-md bubble">18：00</q-btn>
+                    <q-btn-toggle
+                      v-model="reservation.time"
+                      toggle-color="primary"
+                      @click="reservation.time === value"
+                      :options="[
+                        {label: '16:00', value: '16:00'},
+                        {label: '17:00', value: '17:00'},
+                        {label: '18:00', value: '18:00'}
+                      ]"
+                    />
                   </div>
                 </div>
                 <div class="q-px-md q-pt-xl q-pb-md text-h6">請輸入人數</div>
@@ -66,12 +87,12 @@
                         ref="num"
                         rounded outlined
                         type="number"
-                        v-model="adultNum"
+                        v-model="reservation.adultNum"
                         label="大人人數"
                         lazy-rules
                         :rules="[
                           val => val !== null && val !== '' || '請輸入人數',
-                          val => val >= 0 && val <= 10 || '請輸入0-10之間的數字(超過10人請直接來電預約)'
+                          val => val >= 1 && val <= 10 || '請輸入1-10之間的數字(超過10人請直接來電預約)'
                         ]"
                       />
                     </div>
@@ -80,7 +101,7 @@
                         ref="num"
                         rounded outlined
                         type="number"
-                        v-model="childNum"
+                        v-model="reservation.childNum"
                         label="小孩人數"
                         lazy-rules
                         :rules="[
@@ -110,24 +131,24 @@
               <div class="row items-center">
                 <div class="col-2"></div>
                 <div class="col-1">聯絡人姓名</div>
-                <div class="col-4"><q-input outlined v-model="name"/></div>
+                <div class="col-4"><q-input outlined v-model="reservation.name"/></div>
                 <div class="col-3 flex justify-center">
-                  <q-radio v-model="gender" val="male" label="先生" />
-                  <q-radio v-model="gender" val="female" label="女士" />
-                  <q-radio v-model="gender" val="other" label="其他" />
+                  <q-radio v-model="reservation.gender" val="male" label="先生" />
+                  <q-radio v-model="reservation.gender" val="female" label="女士" />
+                  <q-radio v-model="reservation.gender" val="other" label="其他" />
                 </div>
                 <div class="col-2"></div>
               </div>
               <div class="row text-normal items-center">
                 <div class="col-2"></div>
                 <div class="col-1">手機號碼</div>
-                <div class="col-6"><q-input outlined v-model="phone"/></div>
+                <div class="col-6"><q-input outlined v-model="reservation.phone"/></div>
                 <div class="col-2"></div>
               </div>
               <div class="row text-normal items-center">
                 <div class="col-2"></div>
                 <div class="col-1">email</div>
-                <div class="col-6"><q-input outlined v-model="email"/></div>
+                <div class="col-6"><q-input outlined v-model="reservation.email"/></div>
                 <div class="col-3"></div>
               </div>
               <div class="row text-normal items-center">
@@ -135,7 +156,7 @@
                 <div class="col-1">備註</div>
                 <div class="col-6">
                   <q-input
-                    v-model="extra"
+                    v-model="reservation.remark"
                     outlined
                     type="textarea"
                   />
@@ -169,31 +190,31 @@
             <div align="center" class="col-12 q-gutter-y-md text-normal">
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">預約日期：</div>
-                <div align="start" class="col-6">2022 年 02 月 16 日</div>
+                <div align="start" class="col-6">{{ reservation.date }}</div>
               </div>
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">預約時間：</div>
-                <div align="start" class="col-6">17:00</div>
+                <div align="start" class="col-6">{{ reservation.time }}</div>
               </div>
               <div class="row">
                 <div align="end" class="col-6  q-pr-xl">預約人數：</div>
-                <div align="start" class="col-6">大人 1 人  小孩 0人</div>
+                <div align="start" class="col-6">大人 {{ reservation.adultNum }} 人  小孩 {{ reservation.childNum }} 人</div>
               </div>
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">預約人姓名：</div>
-                <div align="start" class="col-6">OOO</div>
+                <div align="start" class="col-6"> {{ reservation.name }} </div>
               </div>
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">手機號碼：</div>
-                <div align="start" class="col-6">0912-345-678</div>
+                <div align="start" class="col-6"> {{ reservation.phone }} </div>
               </div>
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">email：</div>
-                <div align="start" class="col-6">test@test.com</div>
+                <div align="start" class="col-6"> {{ reservation.email }} </div>
               </div>
               <div class="row">
                 <div align="end" class="col-6 q-pr-xl">備註：</div>
-                <div align="start" class="col-6">無</div>
+                <div align="start" class="col-6">{{ reservation.remark }}</div>
               </div>
             </div>
           </div>
@@ -204,7 +225,7 @@
                 <q-btn flat @click="step = 2" color="primary" label="上一步" class="q-ml-sm" />
               </div>
               <div align="end" class="col-6">
-                <q-btn color="primary" @click="done3 = true" label="送出預約" />
+                <q-btn color="primary" @click="reserve" label="送出預約" />
               </div>
             </div>
           </q-stepper-navigation>
@@ -239,18 +260,46 @@ export default {
       done1: false,
       done2: false,
       done3: false,
-      date: '',
-      adultNum: 0,
-      childNum: 0,
-      name: '',
-      gender: ['male, female, other'],
-      phone: '',
-      email: '',
-      extra: ''
+      reservation: {
+        date: '',
+        time: '',
+        adultNum: '',
+        childNum: '',
+        name: '',
+        gender: '',
+        phone: '',
+        email: '',
+        remark: ''
+      }
     }
   },
 
   methods: {
+    async reserve () {
+      try {
+        await this.api.post('/reservations', this.reservation, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        console.log(this.reservation)
+        // this.$router.push('/Member/MyOrders')
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+        // component: dialogSuccess,
+          parent: this,
+          title: '錯誤',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
+    },
     reset () {
       this.done1 = false
       this.done2 = false
@@ -259,7 +308,9 @@ export default {
     }
   },
   computed: {
-
+    user () {
+      return this.$store.getters['user/user']
+    }
   }
 }
 </script>

@@ -167,7 +167,16 @@
               <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4">email</div>
-                <div class="col-6"> {{ user.email }} </div>
+                <div class="col-6">
+                  <q-input
+                    ref="email"
+                    outlined
+                    type="text"
+                    v-model="order.email"
+                    lazy-rules
+                    :rules="[ val => val && val.length > 0 || '請輸入email']"
+                  />
+                </div>
                 <div class="col-1"></div>
               </div>
               <div class="row">
@@ -321,36 +330,75 @@
           :done="done3"
         >
           <div class="row q-pt-md q-pb-md text-normal">
-            <div align="center" class="col-12 q-pt-md  text-h6">請確認預約資訊是否正確</div>
+            <div align="center" class="col-12 q-pt-md  text-h6">請確認訂單資訊是否正確</div>
             <div align="center" class="col-12 q-pb-xl text-normal text-grey">如需修改可點選上方步驟返回</div>
             <div align="center" class="col-12 q-gutter-y-md text-normal">
-              <div class="row">
-                <div align="end" class="col-6 q-pr-xl">預約日期：</div>
-                <div align="start" class="col-6">2022 年 02 月 16 日</div>
+              <div align="center" class="row text-h6 text-bold">
+                <div class="col-12">
+                  寄送方式： {{ order.delivery }}
+                </div>
               </div>
               <div class="row">
-                <div align="end" class="col-6 q-pr-xl">預約時間：</div>
-                <div align="start" class="col-6">17:00</div>
+                <div align="end" class="col-6">
+                  <div class="text-body1">收件人姓名：</div>
+                  <div class="text-body1">手機號碼：</div>
+                  <div class="text-body1">email：</div>
+                  <div class="text-body1">寄送地址：</div>
+                  <div class="text-body1">備註：</div>
+                </div>
+                <div align="start" class="col-6">
+                  <div class="text-body1"> {{ order.recipient }} </div>
+                  <div class="text-body1"> {{ order.mobile }} </div>
+                  <div class="text-body1"> {{ order.email }} </div>
+                  <div class="text-body1"> {{ order.address }} </div>
+                  <div class="text-body1"> {{ order.remark }} </div>
+                </div>
+              </div>
+              <div align="center" class="row text-h6 text-bold">
+                <div class="col-12">
+                  付款方式： {{ order.pay }}
+                </div>
               </div>
               <div class="row">
-                <div align="end" class="col-6  q-pr-xl">預約人數：</div>
-                <div align="start" class="col-6">大人 1 人  小孩 0人</div>
+                <div align="end" class="col-6">
+                  <div class="text-body1">信用卡號：</div>
+                  <div class="text-body1">持卡人姓名：</div>
+                  <div class="text-body1">有效期限：</div>
+                  <div class="text-body1">安全碼：</div>
+                </div>
+                <div align="start" class="col-6">
+                  <div class="text-body1"> {{ order.card }} </div>
+                  <div class="text-body1"> {{ order.cardHolder }} </div>
+                  <div class="text-body1"> {{ order.cardExpiry }} </div>
+                  <div class="text-body1"> {{ order.cardCSC }} </div>
+                </div>
               </div>
               <div class="row">
-                <div align="end" class="col-6 q-pr-xl">預約人姓名：</div>
-                <div align="start" class="col-6">OOO</div>
-              </div>
-              <div class="row">
-                <div align="end" class="col-6 q-pr-xl">手機號碼：</div>
-                <div align="start" class="col-6">0912-345-678</div>
-              </div>
-              <div class="row">
-                <div align="end" class="col-6 q-pr-xl">email：</div>
-                <div align="start" class="col-6">test@test.com</div>
-              </div>
-              <div class="row">
-                <div align="end" class="col-6 q-pr-xl">備註：</div>
-                <div align="start" class="col-6">無</div>
+                <div class="col-12">
+                  <q-table
+                  title="購物車"
+                  :data="products"
+                  :columns="columns1"
+                  row-key="name"
+                  binary-state-sort
+                  ref="table"
+                  style="width: 100%; max-width:1500px;"
+                  flat
+                  >
+                    <template v-slot:body="props">
+                      <q-tr :props="props">
+                        <q-td key="productCategories" :props="props">{{ props.row.product.productCategories }}</q-td>
+                        <q-td key="productName" :props="props">{{ props.row.product.productName }}</q-td>
+                        <q-td key="productImage" :props="props">
+                          <img :src="props.row.product.productImage" class="text-center" style="width: 100px; max-height: 100px;">
+                        </q-td>
+                        <q-td key="productPrice" :props="props">{{ props.row.product.productPrice }}</q-td>
+                        <q-td key="quantity" :props="props">{{ props.row.quantity }}</q-td>
+                        <q-td key="subtotal" :props="props">{{ subtotal }}</q-td>
+                      </q-tr>
+                    </template>
+                  </q-table>
+                </div>
               </div>
             </div>
           </div>
@@ -361,7 +409,7 @@
                 <q-btn flat @click="step = 2" color="primary" label="上一步" class="q-ml-sm" />
               </div>
               <div align="end" class="col-6">
-                <q-btn color="primary" @click="checkout" label="結帳" />
+                <q-btn color="primary" @click="checkout" label="結帳" :disabled="products.length === 0" />
               </div>
             </div>
           </q-stepper-navigation>
@@ -410,24 +458,33 @@ const columns = [
   { name: 'subtotal', align: 'center', label: '小計', field: 'subtotal' },
   { name: 'delete', align: 'center', label: '刪除', field: 'delete' }
 ]
+const columns1 = [
+  {
+    name: 'productCategories',
+    required: true,
+    label: '商品種類',
+    align: 'left',
+    field: row => row.product.productCategories,
+    format: val => `${val}`,
+    sortable: true
+  },
+  { name: 'productName', align: 'left', label: '商品名稱', field: 'product.productName' },
+  { name: 'productImage', align: 'center', label: '商品圖片', field: 'product.productImage' },
+  { name: 'productPrice', align: 'center', label: '價格', field: 'product.productPrice' },
+  { name: 'quantity', align: 'center', label: '數量', field: 'quantity' },
+  { name: 'subtotal', align: 'center', label: '小計', field: 'subtotal' }
+]
 
 export default {
   data () {
     return {
       products: [],
       columns,
+      columns1,
       step: 1,
       done1: false,
       done2: false,
       done3: false,
-      date: '',
-      adultNum: 0,
-      childNum: 0,
-      name: '',
-      gender: ['male, female, other'],
-      phone: '',
-      email: '',
-      extra: '',
       delOptions: [
         '宅配(冷藏寄送)', '7-11取貨', '全家取貨', '到店取貨'
       ],
@@ -494,19 +551,20 @@ export default {
     },
     async checkout () {
       try {
-        await this.api.post('/orders', {}, {
+        await this.api.post('/orders', this.order, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
         })
-        this.$router.push('/Member/MyOrders')
+        console.log(this.order)
+        // this.$router.push('/Member/MyOrders')
       } catch (error) {
         console.log(error)
         this.$q.dialog({
         // component: dialogSuccess,
           parent: this,
           title: '錯誤',
-          message: '結帳失敗'
+          message: error.response.data.message
         }).onOk(() => {
         // console.log('OK')
         }).onCancel(() => {

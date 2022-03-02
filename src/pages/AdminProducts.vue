@@ -30,7 +30,7 @@
             <q-td key="editOrDelete">
               <div class="row">
                 <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="editProduct(props.pageIndex)">編輯商品</q-btn></div>
-                <div class="col-6"><q-btn to="/Admin/editProduct" size="0.7rem" class="bg-white bubble">刪除商品</q-btn></div>
+                <div class="col-6"><q-btn size="0.7rem" @click="deleteProduct" class="bg-white bubble">刪除商品</q-btn></div>
               </div>
             </q-td>
           </q-tr>
@@ -114,7 +114,6 @@ export default {
     },
     editProduct (index) {
       this.form = { ...this.products[index], image: null, index }
-      console.log(this.products[index])
       this.$q.dialog({
         title: '',
         component: dialogEditProducts,
@@ -139,6 +138,9 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    },
+    deleteProduct (pageIndex) {
+      this.products.splice(pageIndex, 1)
     }
   },
   async created () {

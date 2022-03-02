@@ -25,16 +25,15 @@
           narrow-indicator
         >
           <q-tab name="ALL" label="全部商品" />
-          <q-tab name="Cakes" label="蛋糕" />
-          <q-tab name="Cookies" label="餅乾" />
-          <q-tab name="Tart&Pie" label="塔&派" />
-          <q-tab name="Desserts" label="點心" />
-          <q-tab name="Tools" label="烘焙用具" />
+          <q-tab name="Cakes" label="蛋糕" @click="filter='蛋糕'" />
+          <q-tab name="Cookies" label="餅乾" @click="filter='餅乾'" />
+          <q-tab name="Tart&Pie" label="塔&派" @click="filter='塔&派'" />
+          <q-tab name="Desserts" label="點心" @click="filter='點心'" />
+          <q-tab name="Tools" label="烘焙用具" @click="filter='烘焙用具'" />
         </q-tabs>
         <q-separator />
         <q-tab-panels v-model="tab" animated class="text-brown">
           <q-tab-panel name="ALL">
-
             <div class="row q-pa-md">
               <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in products" :key="product._id">
                 <productCard :product="product"></productCard>
@@ -42,24 +41,39 @@
             </div>
           </q-tab-panel>
           <q-tab-panel name="Cakes">
-            <div class="text-h6">Alarms</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="row q-pa-md">
+              <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in filterProducts" :key="product._id">
+                <productCard :product="product"></productCard>
+              </div>
+            </div>
           </q-tab-panel>
           <q-tab-panel name="Cookies">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="row q-pa-md">
+              <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in filterProducts" :key="product._id">
+                <productCard :product="product"></productCard>
+              </div>
+            </div>
           </q-tab-panel>
           <q-tab-panel name="Tart&Pie">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="row q-pa-md">
+              <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in filterProducts" :key="product._id">
+                <productCard :product="product"></productCard>
+              </div>
+            </div>
           </q-tab-panel>
           <q-tab-panel name="Desserts">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="row q-pa-md">
+              <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in filterProducts" :key="product._id">
+                <productCard :product="product"></productCard>
+              </div>
+            </div>
           </q-tab-panel>
           <q-tab-panel name="Tools">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="row q-pa-md">
+              <div class="col-12 col-md-6 col-lg-3 q-pa-md" v-for="product in filterProducts" :key="product._id">
+                <productCard :product="product"></productCard>
+              </div>
+            </div>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -102,7 +116,16 @@ export default {
     return {
       tab: 'ALL',
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      products: []
+      products: [],
+      filter: ''
+    }
+  },
+  computed: {
+    filterProducts () {
+      return this.products.filter(item => {
+        if (this.filter === '') return true
+        return item.productCategories === this.filter
+      })
     }
   },
   async created () {

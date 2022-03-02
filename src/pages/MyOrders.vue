@@ -5,10 +5,10 @@
       :data="orders"
       :columns="columns"
       row-key="name"
-      binary-state-sort
       ref="table"
       >
         <template v-slot:body="props">
+          <q-th :props="props"> {{ props }} </q-th>
           <q-tr :props="props">
             <q-td key="productCategories" :props="props">{{ props }}</q-td>
             <q-td key="productName" :props="props">{{ props.row.productName }}</q-td>
@@ -46,10 +46,9 @@ const columns = [
     label: '商品種類',
     align: 'left',
     field: row => row.productCategories,
-    format: val => `${val}`,
-    sortable: true
+    format: val => `${val}`
   },
-  { name: 'productName', align: 'left', label: '商品名稱', field: 'productName', sortable: true },
+  { name: 'productName', align: 'left', label: '商品名稱', field: 'productName' },
   { name: 'productImage', align: 'center', label: '商品圖片', field: 'productImage', style: 'width: 10px' },
   { name: 'productPrice', align: 'center', label: '價格', field: 'productPrice' },
   { name: 'productSell', align: 'center', label: '上架狀態', field: 'productSell' },
