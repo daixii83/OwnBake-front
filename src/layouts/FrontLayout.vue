@@ -20,7 +20,7 @@
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
             <!-- <q-route-tab to="/Forum" label="討論區" /> -->
-            <q-route-tab to="/ContactUs" label="聯絡我們" />
+            <!-- <q-route-tab to="/ContactUs" label="聯絡我們" /> -->
             <q-route-tab v-if="user.isLogin" to="/Member" label="會員專區" />
             <q-route-tab v-if="user.isAdmin" to="/Admin" label="管理者專區" />
           </q-tabs>
