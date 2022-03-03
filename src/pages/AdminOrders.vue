@@ -19,7 +19,7 @@
               <div v-if="props.row.order.orderStatus === true" > 已完成 </div>
             </q-td>
             <q-td key="orderRecipient" :props="props">{{ props.row.order.recipient }}</q-td>
-            <q-td key="orderTotal" :props="props">{{ total }}</q-td>
+            <!-- <q-td key="orderTotal" :props="props">{{ total }}</q-td> -->
             <q-td key="editOrDelete">
               <div class="row">
                 <div align="center" class="col-12 q-gutter-md">
@@ -52,7 +52,7 @@ const columns = [
   { name: 'orderInfo', align: 'center', label: '訂單詳細', field: 'orderInfo' },
   { name: 'orderStatus', align: 'center', label: '訂單狀態', field: 'orderStatus' },
   { name: 'orderRecipient', align: 'center', label: '訂購人', field: 'orderRecipient' },
-  { name: 'orderTotal', align: 'center', label: '總金額', field: 'orderRecipient' },
+  // { name: 'orderTotal', align: 'center', label: '總金額', field: 'orderRecipient' },
   { name: 'editOrDelete', align: 'center', label: '操作', field: 'editOrDelete' }
 ]
 
