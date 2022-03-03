@@ -3,6 +3,12 @@
     <q-header reveal height-hint="98">
       <div>
         <q-toolbar class="bg-primary text-white shadow-2" flat>
+          <q-img
+            src="../assets/logo_notitle.png"
+            basic
+            style="width: 50px;"
+          ></q-img>
+          <q-btn flat to="/Home" label="OwnBake" />
           <q-space/>
           <!--
             notice shrink property since we are placing it
@@ -12,7 +18,6 @@
             <q-route-tab to="/AboutUs" label="關於我們" />
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
-            <q-btn flat to="/Home" label="OwnBake" />
             <!-- <q-route-tab to="/Forum" label="討論區" /> -->
             <q-route-tab to="/ContactUs" label="聯絡我們" />
             <q-route-tab v-if="user.isLogin && user.isAdmin" to="/Admin" label="管理者介面" />
