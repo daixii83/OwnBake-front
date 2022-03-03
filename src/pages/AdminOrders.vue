@@ -137,6 +137,7 @@ export default {
         }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
         })
+        // this.products.splice(pageIndex, 1)
       } catch (error) {
         console.log(error)
         this.$q.dialog({
