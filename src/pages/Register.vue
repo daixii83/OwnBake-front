@@ -140,6 +140,7 @@ export default {
         }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
         })
+        this.$router.push('/Login')
       } catch (error) {
         this.$q.dialog({
           // component: dialogSuccess,

@@ -283,7 +283,7 @@ export default {
           }
         })
         console.log(this.reservation)
-        // this.$router.push('/Member/MyOrders')
+        this.$router.push('/Member/MyReservations')
       } catch (error) {
         console.log(error)
         this.$q.dialog({
