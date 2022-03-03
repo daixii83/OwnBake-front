@@ -28,7 +28,7 @@
             <q-td key="editOrDelete">
               <div class="row">
                 <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="editProduct(props.pageIndex)">編輯商品</q-btn></div>
-                <div class="col-6"><q-btn size="0.7rem" @click="deleteProduct" class="bg-white bubble">刪除商品</q-btn></div>
+                <div class="col-6"><q-btn size="0.7rem" @click="deleteProduct(props.row._id)" class="bg-white bubble">刪除商品</q-btn></div>
               </div>
             </q-td>
           </q-tr>
@@ -137,8 +137,39 @@ export default {
         console.log('Called on OK or Cancel')
       })
     },
-    deleteProduct (pageIndex) {
-      this.products.splice(pageIndex, 1)
+    async deleteProduct (_id) {
+      console.log(_id)
+      try {
+        await this.api.delete('/products/' + _id, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '刪除成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+          parent: this,
+          title: '失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
     }
   },
   async created () {

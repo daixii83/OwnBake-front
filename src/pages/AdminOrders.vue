@@ -24,7 +24,7 @@
               <div class="row">
                 <div align="center" class="col-12 q-gutter-md">
                   <q-btn size="0.7rem" class="bg-white bubble" @click="completedOrder(props.pageIndex)">完成訂單</q-btn>
-                  <q-btn size="0.7rem" class="bg-white bubble">刪除訂單</q-btn>
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="deleteOrders(props.row._id)" >刪除訂單</q-btn>
                 </div>
               </div>
             </q-td>
@@ -106,6 +106,40 @@ export default {
         console.log(error)
         this.$q.dialog({
         // component: dialogSuccess,
+          parent: this,
+          title: '失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
+    },
+    async deleteOrders (_id) {
+      console.log(_id)
+      try {
+        await this.api.delete('/Orders/' + _id, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '刪除成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
           parent: this,
           title: '失敗',
           message: error.response.data.message
