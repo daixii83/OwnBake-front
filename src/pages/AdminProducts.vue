@@ -21,12 +21,10 @@
             </q-td>
             <q-td key="productPrice" :props="props">{{ props.row.productPrice }}</q-td>
             <q-td key="productSell" :props="props">
-              {{ props.row.productSell }}
-              <!-- <p v-if="props.row.productSell = true">上架中</p> -->
-              <!-- <p v-if="props.row.productSell = false">未上架</p> -->
+              {{ props.row.productSell? '上架中' : '未上架' }}
             </q-td>
             <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td>
-            <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td>
+            <!-- <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td> -->
             <q-td key="editOrDelete">
               <div class="row">
                 <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="editProduct(props.pageIndex)">編輯商品</q-btn></div>
@@ -75,7 +73,7 @@ const columns = [
   { name: 'productPrice', align: 'center', label: '價格', field: 'productPrice' },
   { name: 'productSell', align: 'center', label: '上架狀態', field: 'productSell' },
   { name: 'productDescription', align: 'center', label: '商品說明', field: 'productDescription' },
-  { name: 'quantitySold', align: 'center', label: '售出總數', field: 'quantitySold' },
+  // { name: 'quantitySold', align: 'center', label: '售出總數', field: 'quantitySold' },
   { name: 'editOrDelete', align: 'center', label: '操作', field: 'editOrDelete' }
 ]
 
