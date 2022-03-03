@@ -30,7 +30,7 @@
           </q-img>
           <q-card-actions class="card-title" align="center">
             <div class="text-h6">蛋糕</div>
-            <q-btn size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
+            <q-btn to="/Products" size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
           </q-card-actions>
         </q-card>
         </div>
@@ -40,7 +40,7 @@
           </q-img>
           <q-card-actions class="card-title" align="center">
             <div class="text-h6">餅乾</div>
-            <q-btn to="/ContactUs" size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
+            <q-btn to="/Products" size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right" ></q-icon>看更多</q-btn>
           </q-card-actions>
         </q-card>
         </div>
@@ -50,7 +50,7 @@
           </q-img>
           <q-card-actions class="card-title" align="center">
             <div class="text-h6">塔&派</div>
-            <q-btn size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
+            <q-btn to="/Products" size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
           </q-card-actions>
         </q-card>
         </div>
@@ -60,7 +60,7 @@
           </q-img>
           <q-card-actions class="card-title" align="center">
             <div class="text-h6">點心</div>
-            <q-btn size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
+            <q-btn to="/Products" size="1rem" class="bg-white q-px-md bubble"><q-icon size="20px" name="far fa-hand-point-right"></q-icon>看更多</q-btn>
           </q-card-actions>
         </q-card>
         </div>
