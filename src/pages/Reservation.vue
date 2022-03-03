@@ -263,8 +263,8 @@ export default {
       reservation: {
         date: '',
         time: '',
-        adultNum: '',
-        childNum: '',
+        adultNum: '0',
+        childNum: '0',
         name: '',
         gender: '',
         phone: '',
