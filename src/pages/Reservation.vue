@@ -131,7 +131,12 @@
               <div class="row items-center">
                 <div class="col-2"></div>
                 <div class="col-1">聯絡人姓名</div>
-                <div class="col-4"><q-input outlined v-model="reservation.name"/></div>
+                <div class="col-4">
+                  <q-input
+                  outlined
+                  v-model="reservation.name"
+                  :rules="[ val => val.length > 1 || '請輸入聯絡人姓名' ]"
+                  /></div>
                 <div class="col-3 flex justify-center">
                   <q-radio v-model="reservation.gender" val="male" label="先生" />
                   <q-radio v-model="reservation.gender" val="female" label="女士" />
@@ -142,13 +147,26 @@
               <div class="row text-normal items-center">
                 <div class="col-2"></div>
                 <div class="col-1">手機號碼</div>
-                <div class="col-6"><q-input outlined v-model="reservation.phone"/></div>
+                <div class="col-6">
+                  <q-input
+                  outlined
+                  v-model="reservation.phone"
+                  :rules="[ val => val.length > 1 || '請輸入手機號碼' ]"
+                  />
+                </div>
                 <div class="col-2"></div>
               </div>
               <div class="row text-normal items-center">
                 <div class="col-2"></div>
                 <div class="col-1">email</div>
-                <div class="col-6"><q-input outlined v-model="reservation.email"/></div>
+                <div class="col-6">
+                  <q-input
+                  outlined
+                  v-model="reservation.email"
+                  :rules="[val => !!val || '請輸入您的email', isValidEmail]"
+                  lazy-rules
+                  />
+                </div>
                 <div class="col-3"></div>
               </div>
               <div class="row text-normal items-center">
@@ -275,6 +293,10 @@ export default {
   },
 
   methods: {
+    isValidEmail (val) {
+      const emailPattern = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
+      return emailPattern.test(val) || '信箱格式錯誤'
+    },
     async reserve () {
       try {
         await this.api.post('/reservations', this.reservation, {
@@ -284,6 +306,18 @@ export default {
         })
         console.log(this.reservation)
         this.$router.push('/Member/MyReservations')
+        this.$q.dialog({
+        // component: dialogSuccess,
+          parent: this,
+          title: '成功',
+          message: '預約成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
       } catch (error) {
         console.log(error)
         this.$q.dialog({
