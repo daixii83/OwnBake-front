@@ -61,13 +61,13 @@
         <div class="col-md-2">
           <q-card class="bg-dark" flat>
             <q-card-section>
-              <div class="text-subtitle1"><a class="link" href="/AboutUs">關於我們</a></div>
+              <div class="text-subtitle1"><a class="link" href="#/AboutUs">關於我們</a></div>
               <p>
-                <a class="link" href="/AboutUs/#AboutOwnBake">品牌故事</a> <br>
-                <a class="link" href="/AboutUs">材料來源</a> <br>
-                <a class="link" href="/AboutUs/#HowToStart">流程介紹</a> <br>
-                <a class="link" href="/AboutUs">材料包須知</a> <br>
-                <a class="link" href="/AboutUs">來店須知</a>
+                <a class="link" href="#/AboutUs/#AboutOwnBake">品牌故事</a> <br>
+                <a class="link" href="#/AboutUs">材料來源</a> <br>
+                <a class="link" href="#/AboutUs/#HowToStart">流程介紹</a> <br>
+                <a class="link" href="#/AboutUs">材料包須知</a> <br>
+                <a class="link" href="#/AboutUs">來店須知</a>
               </p>
             </q-card-section>
           </q-card>
@@ -75,13 +75,13 @@
         <div class="col-md-2">
           <q-card class="bg-dark" flat>
             <q-card-section>
-              <div class="text-subtitle1"><a class="link" href="/Products">商品介紹</a></div>
+              <div class="text-subtitle1"><a class="link" href="#/Products">商品介紹</a></div>
               <p>
-                <a class="link" href="/Products">蛋糕</a> <br>
-                <a class="link" href="/Products">餅乾</a> <br>
-                <a class="link" href="/Products">塔 & 派</a> <br>
-                <a class="link" href="/Products">點心</a> <br>
-                <a class="link" href="/Products">烘焙用具</a>
+                <a class="link" href="#/Products">蛋糕</a> <br>
+                <a class="link" href="#/Products">餅乾</a> <br>
+                <a class="link" href="#/Products">塔 & 派</a> <br>
+                <a class="link" href="#/Products">點心</a> <br>
+                <a class="link" href="#/Products">烘焙用具</a>
               </p>
             </q-card-section>
           </q-card>
@@ -89,13 +89,12 @@
         <div class="col-md-2">
           <q-card class="bg-dark" flat>
             <q-card-section>
-              <div class="text-subtitle1"><a class="link" href="/AboutUs">會員中心</a></div>
+              <div class="text-subtitle1"><a class="link" href="#/Member">會員中心</a></div>
               <p>
-                <a class="link" href="/AboutUs">會員登入</a> <br>
-                <a class="link" href="/AboutUs">會員註冊</a> <br>
-                <a class="link" href="/AboutUs">訂單查詢</a> <br>
-                <a class="link" href="/AboutUs">預約查詢</a> <br>
-                <a class="link" href="/Forum">討論區</a>
+                <a class="link" href="#/Login">會員登入</a> <br>
+                <a class="link" href="#/Register">會員註冊</a> <br>
+                <a class="link" href="#/Member/MyOrders">訂單查詢</a> <br>
+                <a class="link" href="#/Member/MyReservations">預約查詢</a> <br>
               </p>
             </q-card-section>
           </q-card>
@@ -103,7 +102,7 @@
         <div class="col-md-2">
           <q-card class="bg-dark" flat>
             <q-card-section>
-              <div class="text-subtitle1"><a class="link" href="/ContactUs">聯絡我們</a></div>
+              <div class="text-subtitle1"><a class="link" href="#/ContactUs">聯絡我們</a></div>
               <p>
                 <a class="link" href="/AboutUs">意見回饋</a> <br>
                 <a class="link" href="/AboutUs">常見問題</a> <br>
@@ -111,7 +110,7 @@
               <div class="text-body2">準備好了嗎？</div>
               <div class="text-subtitle1">
                 <p>
-                  <a class="link" href="/Reservation">預約體驗</a> <br>
+                  <a class="link" href="#/Reservation">預約體驗</a> <br>
                 </p>
               </div>
             </q-card-section>

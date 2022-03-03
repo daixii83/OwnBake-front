@@ -589,7 +589,6 @@ export default {
           }
         })
         console.log(this.order)
-        this.$router.push('/Member/MyOrders')
         this.$q.dialog({
         // component: dialogSuccess,
           parent: this,
@@ -602,6 +601,7 @@ export default {
         }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
         })
+        this.$router.push('/Member/MyOrders')
       } catch (error) {
         console.log(error)
         this.$q.dialog({

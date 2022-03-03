@@ -27,7 +27,7 @@
           寄送方式：{{ orders.order.delivery }}
         </div>
       </div>
-      <div class="row q-pa-md">
+      <div class="row q-pa-md bg-white">
         <div class="col-2">
           <div>
             寄件人姓名：
@@ -78,7 +78,7 @@
           手機條碼：{{ orders.order.code }}
         </div>
       </div>
-      <q-card-actions align="right">
+      <q-card-actions align="center" class="q-pa-md">
         <q-btn color="primary" label="關閉" @click="hide" />
       </q-card-actions>
     </q-card>
