@@ -31,11 +31,16 @@
         <q-separator />
         <q-tab-panels v-model="panel" animated class="text-brown">
           <q-tab-panel name="Member">
-          <div class="q-px-md">
-            <div class="text-h6">用戶名稱： {{ user.userName }} </div>
-            <div class="text-h6">用戶帳號： {{ user.account }} </div>
-            <div class="text-h6">用戶密碼： {{ user.password }} </div>
-            <div class="text-h6">email： {{ user.email }}</div>
+          <div class="row q-pa-xl q-gutter-md items-center">
+            <div class="col-2">
+              <q-avatar size="150px">
+                <img src="../assets/avatar_beam01.svg">
+              </q-avatar>
+            </div>
+            <div class="col-4">
+              <div class="text-h6">用戶帳號： {{ user.account }} </div>
+              <div class="text-h6">email： {{ user.email }}</div>
+            </div>
           </div>
           </q-tab-panel>
           <q-tab-panel name="MyOrders">
