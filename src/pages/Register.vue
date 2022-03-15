@@ -1,5 +1,5 @@
 <template>
-  <div class="q-px-md">
+  <div>
     <div class="q-pa-xl bg-accent">
       <div align="center" class="q-py-xl row fit items-center">
         <div class="col-12">

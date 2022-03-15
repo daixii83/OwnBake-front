@@ -1,5 +1,5 @@
 <template>
-  <div class="q-px-md">
+  <div class="shadow-1">
     <div id="section1" class="q-pb-xs bg-accent">
       <q-carousel
         animated
@@ -67,25 +67,25 @@
       </div>
     </div>
     <div id="section3" align="center" class="bg-amber-2 q-ma-none q-pa-md row no-wrap items-stretch q-gutter-md">
-      <div class="col-md-2 self-end">
+      <div class="col-4 col-md-2 self-end">
         <q-avatar size="100px">
           <img src="../assets/avatar_beam01.svg">
         </q-avatar>
       </div>
-      <div class="col-md-4 q-pa-md">
+      <div class="col-8 col-md-4 q-pa-md">
         <q-card class="bubble full-height bubble" flat>
             <div class="text-h6">我想在家做</div>
             <q-btn size="1.3rem" class="bg-white q-px-md bubble" to="/Products">購買材料包</q-btn>
         </q-card>
       </div>
-      <q-space />
-      <div class="col-md-4 q-pa-md">
+      <q-space id="sec3space" />
+      <div class="col-8 col-md-4 q-pa-md">
         <q-card class="bubble full-height bubble" flat>
             <div class="text-h6">我想到店體驗</div>
             <q-btn size="1.3rem" class="bg-white q-px-md bubble" to="/Reservation">預約體驗</q-btn>
         </q-card>
       </div>
-      <div class="col-md-2 self-end">
+      <div class="col-4 col-md-2 self-end">
         <q-avatar size="100px">
           <img src="../assets/avatar_beam02.svg">
         </q-avatar>
@@ -115,7 +115,7 @@
     margin: 0
 
   #section3
-    height: 30vh
+    height: 35vh
 
   .bubble
     border-radius: 30px
@@ -131,6 +131,13 @@
       border-left: 0 solid transparent
       border-right: 8px solid transparent
       border-bottom: 8px solid currentColor
+
+  @media (max-width: $breakpoint-sm-max)
+    #section3
+      flex-wrap: wrap
+      height: 100vh
+    #sec3space
+      display: none
 </style>
 
 <script>

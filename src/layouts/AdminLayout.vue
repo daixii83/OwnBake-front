@@ -3,11 +3,13 @@
     <q-header reveal height-hint="98">
       <div>
         <q-toolbar class="bg-primary text-white shadow-2" flat>
-          <q-img
-            src="../assets/logo_notitle.png"
-            basic
-            style="width: 50px;"
-          ></q-img>
+          <div class="q-pa-md">
+            <q-img
+              src="../assets/logo_notitle.png"
+              basic
+              style="width: 50px;"
+            ></q-img>
+          </div>
           <q-btn flat to="/Home" label="OwnBake" />
           <q-space/>
           <!--
@@ -35,11 +37,11 @@
       </div>
     </q-header>
 
-    <q-page-container>
+    <q-page-container class="q-px-xl">
       <router-view />
     </q-page-container>
 
-    <q-footer class="q-px-md q-pb-md text-white">
+    <q-footer class="q-px-xl q-pb-xl text-white">
       <q-toolbar class="q-py-md bg-dark shadow-5 bottomtoolbar">
         <q-space />
         <div class="col-md-3">

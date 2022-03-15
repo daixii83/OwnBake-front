@@ -1,5 +1,5 @@
 <template>
-  <div class="q-px-md bg-primary">
+  <div class=" bg-primary">
     <div class="q-px-xl q-py-xl bg-accent">
       <q-breadcrumbs class="text-brown q-py-md">
         <template v-slot:separator>
