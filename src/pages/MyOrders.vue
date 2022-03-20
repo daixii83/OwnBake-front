@@ -12,9 +12,9 @@
             <q-td key="productCategories" :props="props">{{ props.row._id }}</q-td>
             <q-td key="productName" :props="props">{{ props.row.date }}</q-td>
             <q-td key="productPrice" :props="props">
-              <div v-if="props.row.order.orderStatus === false" > 處理中 </div>
-              <div v-if="props.row.order.orderStatus === true" > 已出貨 </div>
-              <div v-if="props.row.order.cancelStatus === true" > 已取消 </div>
+              <div v-if="props.row.orderStatus === false" > 處理中 </div>
+              <div v-if="props.row.orderStatus === true" > 已出貨 </div>
+              <div v-if="props.row.cancelStatus === true" > 已取消 </div>
             </q-td>
             <q-td key="productSell" :props="props">
               {{ props.row.productSell }}
@@ -26,7 +26,8 @@
             <q-td key="editOrDelete">
               <div class="row">
                 <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn></div>
-                <div class="col-6"><q-btn to="/Admin/editProduct" size="0.7rem" class="bg-white bubble">取消訂單</q-btn></div>
+                <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="cancelOrders(props.row._id, props.row.order)">取消訂單</q-btn>
+                </div>
               </div>
             </q-td>
           </q-tr>
@@ -89,6 +90,44 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    },
+    async cancelOrders (_id, order) {
+      console.log(_id)
+      const data = {
+        cancelStatus: true
+      }
+      try {
+        await this.api.patch('/Orders/' + _id, data, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '取消訂單成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+        // this.products.splice(pageIndex, 1)
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+          parent: this,
+          title: '取消失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
     }
   },
   async created () {

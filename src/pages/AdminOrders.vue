@@ -15,8 +15,9 @@
               <q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn>
             </q-td>
             <q-td key="orderStatus" :props="props">
-              <div v-if="props.row.order.orderStatus === false" > 待處理 </div>
-              <div v-if="props.row.order.orderStatus === true" > 已完成 </div>
+              <div v-if="props.row.orderStatus === false" > 待處理 </div>
+              <div v-if="props.row.orderStatus === true" > 已完成 </div>
+              <div v-if="props.row.cancelStatus === true" > 已取消 </div>
             </q-td>
             <q-td key="orderRecipient" :props="props">{{ props.row.order.recipient }}</q-td>
             <!-- <q-td key="orderTotal" :props="props">{{ total }}</q-td> -->
@@ -108,6 +109,41 @@ export default {
         // component: dialogSuccess,
           parent: this,
           title: '失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
+    },
+    async cancelOrders (_id) {
+      console.log(_id)
+      try {
+        await this.api.patch('/Orders/' + _id, { cancelStatus: true }, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '取消訂單成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+        // this.products.splice(pageIndex, 1)
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+          parent: this,
+          title: '取消失敗',
           message: error.response.data.message
         }).onOk(() => {
         // console.log('OK')
