@@ -93,22 +93,34 @@ export default {
         console.log('Called on OK or Cancel')
       })
     },
-    async completedOrder (index) {
-      this.order = { ...this.orders[index] }
-      console.log(this.orders)
+    async completedOrders (_id, order) {
+      console.log(_id)
+      const data = {
+        orderStatus: true
+      }
       try {
-        const { data } = await this.api.patch('/orders' + this.order._id + this.order.user._id, { orderStatus: true }, {
+        await this.api.patch('/Orders/' + _id, data, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
         })
-        console.log(data.result)
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '完成訂單成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+        // this.products.splice(pageIndex, 1)
       } catch (error) {
         console.log(error)
         this.$q.dialog({
-        // component: dialogSuccess,
           parent: this,
-          title: '失敗',
+          title: '完成訂單失敗',
           message: error.response.data.message
         }).onOk(() => {
         // console.log('OK')

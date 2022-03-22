@@ -11,6 +11,7 @@
       row-key="name"
       binary-state-sort
       ref="table"
+      :key="tableKey"
       >
         <template v-slot:body="props">
           <q-tr :props="props">
@@ -81,10 +82,15 @@ export default {
   data () {
     return {
       columns,
-      products: []
+      products: [],
+      tableKey: 0
     }
   },
   methods: {
+    updateData () {
+      // Vuex logics or others
+      this.tableKey = 1
+    },
     createProduct () {
       this.$q.dialog({
         title: '',
@@ -151,6 +157,7 @@ export default {
           message: '刪除成功'
         }).onOk(() => {
         // console.log('OK')
+          this.$forceUpdate()
         }).onCancel(() => {
         // console.log('Cancel')
         }).onDismiss(() => {
