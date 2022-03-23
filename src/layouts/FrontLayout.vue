@@ -3,7 +3,7 @@
     <q-header reveal height-hint="98">
       <div class="row">
         <q-toolbar class="bg-primary text-white shadow-2" flat>
-          <q-btn dense flat round icon="menu" @click="left = !left" class="mobile-only"/>
+          <q-btn dense flat round icon="menu" @click="left = !left" class="lt-md"/>
           <div class="q-pa-md">
             <q-img
               src="../assets/logo_notitle.png"
@@ -18,7 +18,7 @@
             notice shrink property since we are placing it
             as child of QToolbar
           -->
-          <q-tabs align="center" shrink stretch>
+          <q-tabs align="center" shrink stretch class="gt-sm">
             <q-route-tab to="/AboutUs" label="關於我們" />
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
