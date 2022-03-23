@@ -3,6 +3,7 @@
     <q-header reveal height-hint="98">
       <div>
         <q-toolbar class="bg-primary text-white shadow-2" flat>
+          <q-btn dense flat round icon="menu" @click="left = !left" class="lt-md"/>
           <div class="q-pa-md">
             <q-img
               src="../assets/logo_notitle.png"
@@ -16,7 +17,7 @@
             notice shrink property since we are placing it
             as child of QToolbar
           -->
-          <q-tabs align="center" shrink stretch>
+          <q-tabs align="center" shrink stretch class="gt-sm">
             <q-route-tab to="/AboutUs" label="關於我們" />
             <q-route-tab to="/Products" label="商品介紹" />
             <q-route-tab to="/Reservation" label="預約體驗" />
@@ -36,6 +37,43 @@
         </q-toolbar>
       </div>
     </q-header>
+
+    <q-drawer
+      v-model="left"
+      side="left"
+      behavior="desktop"
+      overlay
+      bordered
+      class="bg-accent lt-md"
+    >
+      <q-scroll-area class="fit">
+        <q-list padding class="menu-list">
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/AboutUs">關於我們</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/Products">產品介紹</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/Reservation">預約體驗</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat v-if="user.isAdmin" to="/Admin">管理者專區</q-btn>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
+    </q-drawer>
 
     <q-page-container class="q-px-xl">
       <router-view />
@@ -149,6 +187,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      left: false
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('user/logout')

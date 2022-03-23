@@ -1,6 +1,6 @@
 <template>
-  <div class="q-px-md bg-primary">
-    <div class="q-px-xl q-py-xl bg-accent">
+  <div class="q-px-md pa-mobile-none bg-primary">
+    <div class="q-pa-xl pa-mobile bg-accent">
       <q-breadcrumbs class="text-brown q-py-md">
         <template v-slot:separator>
           <q-icon
@@ -15,7 +15,7 @@
         <q-breadcrumbs-el label="全部商品" icon="navigation" />
         <q-breadcrumbs-el label="OOO" icon="navigation" />
       </q-breadcrumbs>
-      <div class="q-px-xl q-py-xl bg-white">
+      <div class="q-pa-xl pa-mobile bg-white">
         <div class="row items-center">
           <div class="col-12 col-md-6 col-xl-6">
             <q-img
@@ -24,16 +24,16 @@
             />
           </div>
           <div class="col-12 col-md-6 col-xl-6">
-            <div class="row q-py-xl text-dark">
-              <div align="end" class="col-6 q-gutter-y-md">
-                <div class="text-h6">商品名稱：</div>
-                <div class="text-h6">售價：</div>
-                <div class="text-h6">數量：</div>
+            <div class="row q-py-xl py-mobile text-dark">
+              <div align="end" class="col-md-6 q-gutter-y-md">
+                <div class="text-h6 content">商品名稱：</div>
+                <div class="text-h6 content">售價：</div>
+                <div class="text-h6 content">數量：</div>
               </div>
-              <div class="col-6 q-pl-md q-gutter-y-md text-dark">
-                <div class="text-h6"> {{ productName }} </div>
-                <div class="text-h6"> NT$ {{ productPrice }} </div>
-                <div class="text-h6">
+              <div class="col-md-6 q-pl-md q-gutter-y-md text-dark">
+                <div class="text-h6 content"> {{ productName }} </div>
+                <div class="text-h6 content"> NT$ {{ productPrice }} </div>
+                <div class="text-h6 content">
                   <q-input
                     ref="num"
                     rounded outlined
@@ -49,11 +49,11 @@
                   />
                 </div>
               </div>
-              <div align="center" class="col-12 q-pt-xl"><q-btn size="1rem" class="bg-white q-px-md bubble" @click="addCart">加入購物車&nbsp;&nbsp;<q-icon size="20px" name="fas fa-cart-plus"></q-icon></q-btn></div>
+              <div align="center" class="col-12 q-pt-xl pt-mobile"><q-btn size="1rem" class="bg-white q-px-md bubble" @click="addCart">加入購物車&nbsp;&nbsp;<q-icon size="20px" name="fas fa-cart-plus"></q-icon></q-btn></div>
             </div>
           </div>
-          <div align="center" class="col-12 text-h5 q-pa-xl">商品說明</div>
-          <div class="col-12 text-h6" style="white-space: pre"> {{productDescription}} </div>
+          <div align="center" class="col-12 text-h5 subtitle q-pa-xl pa-mobile">商品說明</div>
+          <div class="col-12 text-h6 content" style="white-space: pre"> {{productDescription}} </div>
         </div>
       </div>
     </div>
