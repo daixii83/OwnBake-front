@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="q-pa-xl bg-accent">
-      <div align="center" class="q-py-xl row fit items-center">
+    <div class="q-pa-xl pa-mobile-sm bg-accent">
+      <div align="center" class="q-py-xl py-mobile row fit items-center">
         <div class="col-12">
           <form @submit.prevent="simulateSubmit" class="q-pa-md">
-            <div class="panel q-pa-xl q-gutter-y-md bg-white column shadow-2">
-            <div class="q-pb-xl text-h4 text-brown">歡迎回來OwnBake！</div>
-            <div class="q-pb-xl text-h5">會員登入</div>
-            <div class="q-pl-md text-h6 text-left">帳號</div>
+            <div class="panel q-pa-xl pa-mobile q-gutter-y-md bg-white column shadow-2">
+            <div class="q-pb-xl pb-mobile text-h4 subtitle text-brown">歡迎回來OwnBake！</div>
+            <div class="q-pb-xl pb-mobile text-h5 content">會員登入</div>
+            <div class="q-pl-md pl-mobile text-h6 text text-left">帳號</div>
             <q-input
               ref="input"
               filled
               v-model="form.account"
               lazy-rules
             />
-            <div class="q-pl-md text-h6 text-left">密碼</div>
+            <div class="q-pl-md pl-mobile text-h6 text text-left">密碼</div>
             <q-input v-model="form.password" filled :type="isPwd ? 'password' :    'text'">
               <template v-slot:append>
                 <q-icon

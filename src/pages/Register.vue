@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="q-pa-xl bg-accent">
-      <div align="center" class="q-py-xl row fit items-center">
+    <div class="q-pa-xl pa-mobile bg-accent">
+      <div align="center" class="q-py-xl py-mobile row fit items-center">
         <div class="col-12">
           <form @submit.prevent="simulateSubmit" class="q-pa-md">
-            <div class="panel q-pa-xl q-gutter-y-md bg-white column shadow-2">
-              <div class="q-pb-xl text-h4 text-brown">新用戶註冊</div>
+            <div class="panel q-pa-xl pa-mobile q-gutter-y-md bg-white column shadow-2">
+              <div class="q-pb-xl pb-mobile text-h4 subtitle text-brown">新用戶註冊</div>
               <q-input
                 ref="input"
                 filled
@@ -64,7 +64,7 @@
                 type="submit"
                 :loading="submitting"
                 label="註冊"
-                class="q-mt-xl"
+                class="q-mt-xl mt-mobile"
                 color="dark"
                 size="1.3rem"
                 @click="register"

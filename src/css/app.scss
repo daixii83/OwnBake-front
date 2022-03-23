@@ -18,4 +18,45 @@
   .content {
     font-size: 18px;
   }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .pa-mobile-none {
+    padding: 0;
+  }
+
+  .pa-mobile {
+    padding: 20px;
+  }
+
+  .pa-mobile-sm {
+    padding: 10px;
+  }
+
+  .px-mobile {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .py-mobile {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .pt-mobile {
+    padding-top: 20px;
+  }
+  .pb-mobile {
+    padding-bottom: 20px;
+  }
+  .pl-mobile {
+    padding-left: 20px
+  }
+  .pr-mobile {
+    padding-right: 20px
+  }
+
+  .q-mt-xl {
+    margin-bottom: 20px !important;
+  }
 }

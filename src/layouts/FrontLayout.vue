@@ -82,11 +82,11 @@
       </q-scroll-area>
     </q-drawer>
 
-    <q-page-container class="q-px-xl">
+    <q-page-container class="q-px-xl pa-mobile">
       <router-view />
     </q-page-container>
 
-    <q-footer class="q-px-xl q-pb-xl text-white">
+    <q-footer class="q-px-xl q-pb-xl px-mobile text-white">
       <q-toolbar class="q-py-md bg-dark shadow-5 bottomtoolbar">
         <q-space />
         <div class="col-md-3">
