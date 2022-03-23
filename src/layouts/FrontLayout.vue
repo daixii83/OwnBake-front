@@ -3,6 +3,7 @@
     <q-header reveal height-hint="98">
       <div class="row">
         <q-toolbar class="bg-primary text-white shadow-2" flat>
+          <q-btn dense flat round icon="menu" @click="left = !left" class="mobile-only"/>
           <div class="q-pa-md">
             <q-img
               src="../assets/logo_notitle.png"
@@ -38,6 +39,48 @@
         </q-toolbar>
       </div>
     </q-header>
+    <q-drawer
+    v-model="left"
+    side="left"
+    behavior="desktop"
+    overlay
+    bordered
+    class="bg-accent"
+    >
+      <q-scroll-area class="fit">
+        <q-list padding class="menu-list">
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/AboutUs">關於我們</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/Products">產品介紹</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat to="/Reservations">預約體驗</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat v-if="user.isLogin" to="/Member">會員專區</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section>
+              <q-btn flat v-if="user.isAdmin" to="/Admin">管理者專區</q-btn>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
+    </q-drawer>
 
     <q-page-container class="q-px-xl">
       <router-view />
@@ -151,10 +194,18 @@
   .bottomtoolbar
     border-radius: 0 0 10px 10px
     flex-wrap: wrap
+
+  .noHover
+    pointer-events: none
 </style>
 
 <script>
 export default {
+  data () {
+    return {
+      left: false
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('user/logout')
