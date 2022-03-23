@@ -63,7 +63,7 @@
 
           <q-item>
             <q-item-section>
-              <q-btn flat to="/Reservations">預約體驗</q-btn>
+              <q-btn flat to="/Reservation">預約體驗</q-btn>
             </q-item-section>
           </q-item>
 

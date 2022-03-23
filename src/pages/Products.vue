@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary">
-    <div class="q-px-xl q-py-xl bg-accent">
+    <div class="q-pa-xl pa-mobile bg-accent">
       <q-breadcrumbs class="text-brown q-py-md">
         <template v-slot:separator>
           <q-icon
