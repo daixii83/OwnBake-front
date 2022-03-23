@@ -45,7 +45,7 @@
     behavior="desktop"
     overlay
     bordered
-    class="bg-accent"
+    class="bg-accent lt-md"
     >
       <q-scroll-area class="fit">
         <q-list padding class="menu-list">

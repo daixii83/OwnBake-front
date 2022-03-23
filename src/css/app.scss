@@ -7,3 +7,15 @@
 .my-font {
   font-family: 'jf-openhuninn';
 }
+
+@media (max-width: $breakpoint-sm-max) {
+  .maintitle {
+    font-size: 36px;
+  }
+  .subtitle {
+    font-size: 24px;
+  }
+  .content {
+    font-size: 18px;
+  }
+}
