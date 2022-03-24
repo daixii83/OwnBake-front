@@ -540,9 +540,7 @@ export default {
         cardCSC: '',
         receipt: '',
         receiptCarrier: '',
-        code: '',
-        orderStatus: false,
-        cancelStatus: false
+        code: ''
       }
     }
   },

@@ -9,24 +9,30 @@
       >
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="productCategories" :props="props">{{ props.row._id }}</q-td>
-            <q-td key="productName" :props="props">{{ props.row.date }}</q-td>
-            <q-td key="productPrice" :props="props">
-              <div v-if="props.row.orderStatus === false" > 處理中 </div>
+            <q-td key="orderId" :props="props">{{ props.row._id }}</q-td>
+            <q-td key="orderDate" :props="props">{{ new Date(props.row.date).toLocaleString('zh-tw') }}</q-td>
+            <q-td key="orderProducts" :props="props">
+              <ul>
+                <li v-for='product in props.row.products' :key='product._id'>
+                  {{ product.product.productName }} x {{ product.quantity }}
+                </li>
+              </ul>
+            </q-td>
+            <q-td key="orderPrice" :props="props">
+              {{ total(props.row) }}
+            </q-td>
+            <q-td key="orderStatus" :props="props">
+              <div v-if="props.row.orderStatus && props.row.cancelStatus === false" > 處理中 </div>
               <div v-if="props.row.orderStatus === true" > 已出貨 </div>
               <div v-if="props.row.cancelStatus === true" > 已取消 </div>
-            </q-td>
-            <q-td key="productSell" :props="props">
-              {{ props.row.productSell }}
-              <!-- <p v-if="props.row.productSell = true">上架中</p> -->
-              <!-- <p v-if="props.row.productSell = false">未上架</p> -->
             </q-td>
             <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td>
             <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td>
             <q-td key="editOrDelete">
-              <div class="row">
-                <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn></div>
-                <div class="col-6"><q-btn size="0.7rem" class="bg-white bubble" @click="cancelOrders(props.row._id, props.row.order)">取消訂單</q-btn>
+              <div align="center" class="row">
+                <div class="col-12 q-gutter-x-md">
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn>
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="cancelOrders(props.row._id, props.row.order)">取消訂單</q-btn>
                 </div>
               </div>
             </q-td>
@@ -43,15 +49,17 @@
 import orderDialog from '../components/orderDialog.vue'
 const columns = [
   {
-    name: 'productCategories',
+    name: 'orderId',
     required: true,
     label: '訂單編號',
     align: 'left',
-    field: row => row.productCategories,
+    field: row => row.orderId,
     format: val => `${val}`
   },
-  { name: 'productName', align: 'left', label: '訂購日期', field: 'productName' },
-  { name: 'productPrice', align: 'center', label: '訂單狀態', field: 'productImage', style: 'width: 10px' },
+  { name: 'orderDate', align: 'left', label: '訂購日期', field: 'orderDate' },
+  { name: 'orderProducts', align: 'left', label: '訂購產品', field: 'orderProducts' },
+  { name: 'orderPrice', align: 'left', label: '總金額', field: 'orderPrice' },
+  { name: 'orderStatus', align: 'center', label: '訂單狀態', field: 'orderStatus' },
   { name: 'editOrDelete', align: 'center', label: '操作', field: 'editOrDelete' }
 ]
 
@@ -90,6 +98,11 @@ export default {
       }).onDismiss(() => {
         console.log('Called on OK or Cancel')
       })
+    },
+    total (thisOrder) {
+      return thisOrder.products.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.quantity * currentValue.product.productPrice
+      }, 0)
     },
     async cancelOrders (_id, order) {
       console.log(_id)
