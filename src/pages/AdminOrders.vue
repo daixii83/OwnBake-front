@@ -10,21 +10,24 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td key="orderId" :props="props">{{ props.row._id }}</q-td>
-            <q-td key="orderDate" :props="props">{{ props.row.date }}</q-td>
+            <q-td key="orderDate" :props="props">{{ new Date(props.row.date).toLocaleString('zh-tw') }}</q-td>
             <q-td key="orderInfo" :props="props">
               <q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn>
             </q-td>
             <q-td key="orderStatus" :props="props">
-              <div v-if="props.row.orderStatus === false" > 待處理 </div>
+              <div v-if="props.row.orderStatus || props.row.cancelStatus === false" > 待處理 </div>
               <div v-if="props.row.orderStatus === true" > 已完成 </div>
               <div v-if="props.row.cancelStatus === true" > 已取消 </div>
             </q-td>
             <q-td key="orderRecipient" :props="props">{{ props.row.order.recipient }}</q-td>
             <!-- <q-td key="orderTotal" :props="props">{{ total }}</q-td> -->
-            <q-td key="editOrDelete">
+            <q-td key="editOrDelete" :props="props">
               <div class="row">
                 <div align="center" class="col-12 q-gutter-md">
-                  <q-btn size="0.7rem" class="bg-white bubble" @click="completedOrder(props.pageIndex)">完成訂單</q-btn>
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="completedOrders(props.row._id, props.row.order)">完成訂單
+                  </q-btn>
+                  <q-btn size="0.7rem" class="bg-white bubble" @click="cancelOrders(props.row._id, props.row.order)">取消訂單
+                  </q-btn>
                   <q-btn size="0.7rem" class="bg-white bubble" @click="deleteOrders(props.row._id)" >刪除訂單</q-btn>
                 </div>
               </div>
@@ -93,13 +96,13 @@ export default {
         console.log('Called on OK or Cancel')
       })
     },
-    async completedOrders (_id, order) {
+    async completedOrders (_id) {
       console.log(_id)
-      const data = {
-        orderStatus: true
+      const orderData = {
+        deliveryStatus: true
       }
       try {
-        await this.api.patch('/Orders/' + _id, data, {
+        await this.api.patch('/orders/' + _id, orderData, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
@@ -133,8 +136,11 @@ export default {
     },
     async cancelOrders (_id) {
       console.log(_id)
+      const cancelData = {
+        cancelStatus: true
+      }
       try {
-        await this.api.patch('/Orders/' + _id, { cancelStatus: true }, {
+        await this.api.patch('/orders/' + _id, cancelData, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
@@ -169,7 +175,7 @@ export default {
     async deleteOrders (_id) {
       console.log(_id)
       try {
-        await this.api.delete('/Orders/' + _id, {
+        await this.api.delete('/orders/' + _id, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }

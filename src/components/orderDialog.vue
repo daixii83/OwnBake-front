@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin bg-accent q-pa-md" style="max-width: 1500px;max-height: 1000px; width:1000px;height:650px">
       <div class="row q-pa-md bg-dark text-white">
         <div class="col-4">訂單號碼： {{ orders._id }}</div>
-        <div class="col-4">訂購日期： {{ orders.date }}</div>
+        <div class="col-4">訂購日期： {{ new Date(orders.date).toLocaleString('zh-tw') }}</div>
         <div class="col-4">
           訂單狀態：<div class="div" v-if="orders.orderStatus === true">已完成</div><div class="div" v-if="orders.orderStatus && cancelStatus === false">待出貨</div><div class="div" v-if="orders.cancelStatus === true">已取消</div>
         </div>

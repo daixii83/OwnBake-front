@@ -22,7 +22,7 @@
               {{ total(props.row) }}
             </q-td>
             <q-td key="orderStatus" :props="props">
-              <div v-if="props.row.orderStatus && props.row.cancelStatus === false" > 處理中 </div>
+              <div v-if="props.row.orderStatus || props.row.cancelStatus === false" > 處理中 </div>
               <div v-if="props.row.orderStatus === true" > 已出貨 </div>
               <div v-if="props.row.cancelStatus === true" > 已取消 </div>
             </q-td>
