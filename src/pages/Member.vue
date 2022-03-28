@@ -46,7 +46,7 @@
           <q-tab-panel name="MyOrders">
             <router-view />
           </q-tab-panel>
-          <q-tab-panel name="MyReservations">
+          <q-tab-panel name="MyReservations" align="center">
             <router-view />
           </q-tab-panel>
           <!-- <q-tab-panel name="MyArticles"> -->

@@ -1,5 +1,43 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div align="center" style="max-width: 1000px; width: 100%;">
+    <q-dialog v-model="displayEvent">
+      <div>
+        <q-card v-if="event" style="max-width: 300px;">
+          <q-toolbar class="bg-primary" style="min-width: 300px;">
+            <q-toolbar-title class="text-accent">
+              預約資訊
+            </q-toolbar-title>
+            <q-btn flat round color="accent" icon="close" v-close-popup></q-btn>
+          </q-toolbar>
+          <q-card-section class="inset-shadow bg-accent q-pt-md pt-mobile">
+            <div class="row justify-center">
+              <div class="col-5">
+                <div align="right" class="row">
+                  <div class="col-12">預約人：</div>
+                  <div class="col-12">預約日期：</div>
+                  <div class="col-12">預約時間：</div>
+                  <div class="col-12">大人人數：</div>
+                  <div class="col-12">小孩人數：</div>
+                </div>
+              </div>
+              <div class="col-1"></div>
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12"> {{ event.reservation.name }} </div>
+                  <div class="col-12"> {{ event.reservation.date }} </div>
+                  <div class="col-12"> {{ event.reservation.time }} </div>
+                  <div class="col-12"> {{ event.reservation.adultNum }} </div>
+                  <div class="col-12"> {{ event.reservation.childNum }} </div>
+                </div>
+              </div>
+            </div>
+          </q-card-section>
+          <q-card-actions align="center" class="bg-accent q-pb-md pb-mobile">
+            <q-btn label="取消預約" color="primary" v-close-popup></q-btn>
+          </q-card-actions>
+        </q-card>
+      </div>
+    </q-dialog>
     <q-toolbar class="text-dark text-h5 row justify-between items-center">
       <div class="col-4" style="text-align: center;">
       {{ title }}
@@ -24,19 +62,19 @@
       :short-weekday-label="shortWeekdayLabel"
       :short-month-label="shortMonthLabel"
       @change="onChange"
+      :data="events"
     >
       <template #day="{ timestamp }">
         <template v-for="(event, index) in getEvents(timestamp.date)">
           <q-badge
             :key="index"
-            :props="event"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
             :class="badgeClasses(event, 'day')"
             :style="badgeStyles(event, 'day')"
-            @click="reservationInfo(event, index)"
+            @click.stop.prevent="showEvent(event)"
           >
             {{ event.reservation.time }}
-            <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+            <span class="ellipsis">{{ event.title }}</span>
           </q-badge>
         </template>
       </template>
@@ -135,7 +173,9 @@ export default {
       shortMonthLabel: false,
       dateFormatter: undefined,
       start: undefined,
-      events: []
+      events: [],
+      event: null,
+      displayEvent: false
     }
   },
   beforeMount () {
@@ -249,9 +289,13 @@ export default {
       }
       return events
     },
+    showEvent (event) {
+      this.event = event
+      this.displayEvent = true
+    },
     reservationInfo (event, index) {
-      this.event = event[index]
-      console.log(this.event)
+      this.event = { ...this.event[index] }
+      console.log(this.reservation)
       this.$q.dialog({
         title: '',
         component: reservationDialog,
