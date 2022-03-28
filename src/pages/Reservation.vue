@@ -36,8 +36,9 @@
                 <div class="q-py-md text-h6">請選擇日期</div>
                 <q-date
                   v-model="reservation.date"
-                  navigation-min-year-month="2022/03"
-                  navigation-max-year-month="2022/04"
+                  navigation-min-year-month="2022-03"
+                  navigation-max-year-month="2022-12"
+                  mask="YYYY-MM-DD"
                 />
               </div>
               <div class="col-md-6">
