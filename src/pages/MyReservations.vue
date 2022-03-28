@@ -1,5 +1,5 @@
 <template>
-  <div align="center" style="max-width: 1000px; width: 100%;">
+  <div style="max-width: 1000px; width: 100%;">
     <q-dialog v-model="displayEvent">
       <div>
         <q-card v-if="event" style="max-width: 300px;">
@@ -94,7 +94,6 @@
 <script>
 // normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
 import QCalendar from '@quasar/quasar-ui-qcalendar' // ui is aliased from '@quasar/quasar-ui-qcalendar'
-import reservationDialog from '../components/reservationDialog.vue'
 
 // const CURRENT_DAY = new Date()
 //
@@ -292,34 +291,6 @@ export default {
     showEvent (event) {
       this.event = event
       this.displayEvent = true
-    },
-    reservationInfo (event, index) {
-      this.event = { ...this.event[index] }
-      console.log(this.reservation)
-      this.$q.dialog({
-        title: '',
-        component: reservationDialog,
-
-        // optional if you want to have access to
-        // Router, Vuex store, and so on, in your
-        // custom component:
-        parent: this, // becomes child of this Vue node
-        // ("this" points to your Vue component)
-        // (prop was called "root" in < 1.1.0 and
-        // still works, but recommending to switch
-        // to the more appropriate "parent" name)
-
-        // props forwarded to component
-        // (everything except "component" and "parent" props above):
-        reservationInfo: this.event
-      // ...more.props...
-      }).onOk(() => {
-        console.log('OK')
-      }).onCancel(() => {
-        console.log('Cancel')
-      }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
-      })
     }
   },
   async created () {
