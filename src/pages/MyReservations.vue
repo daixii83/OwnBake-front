@@ -1,5 +1,10 @@
 <template>
   <div style="max-width: 1000px; width: 100%;">
+    <div class="row">
+      <div align="left" class="col-12 q-py-md py-mobile text-h6">
+        以下是您的預約資訊(點擊標籤可查看詳細內容)：
+      </div>
+    </div>
     <q-dialog v-model="displayEvent">
       <div>
         <q-card v-if="event" style="max-width: 300px;">
@@ -33,23 +38,24 @@
             </div>
           </q-card-section>
           <q-card-actions align="center" class="bg-accent q-pb-md pb-mobile">
-            <q-btn label="取消預約" color="primary" v-close-popup></q-btn>
+            <q-btn label="取消預約" color="primary" @click="cancelReservations(event._id, event.reservation)"></q-btn>
           </q-card-actions>
         </q-card>
       </div>
     </q-dialog>
-    <q-toolbar class="text-dark text-h5 row justify-between items-center">
-      <div class="col-4" style="text-align: center;">
+    <q-toolbar class="bg-deep-orange-11 text-accent text-h5 row justify-between items-center">
+      <div class="col-4 text-h5" style="text-align: center;">
       {{ title }}
       </div>
 
       <q-btn-group flat class="col-3">
-        <q-btn color="primary" flat label="Prev" @click="onPrev" />
-        <q-btn color="primary" flat label="Next" @click="onNext" />
+        <q-btn color="white" class="text-bold" flat label="Prev" @click="onPrev" />
+        <q-btn color="white" class="text-bold" flat label="Next" @click="onNext" />
       </q-btn-group>
     </q-toolbar>
     <q-separator class="full-width" /><q-separator />
     <q-calendar
+      bordered
       ref="calendar"
       v-model="selectedDate"
       view="month"
@@ -62,13 +68,26 @@
       :short-weekday-label="shortWeekdayLabel"
       :short-month-label="shortMonthLabel"
       @change="onChange"
+      class="text-dark"
     >
       <template #day="{ timestamp }">
         <template v-for="(event, index) in getEvents(timestamp.date)">
           <q-badge
             :key="index"
+            v-if=" event.title !== '已取消預約'"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
             :class="badgeClasses(event, 'day')"
+            :style="badgeStyles(event, 'day')"
+            @click.stop.prevent="showEvent(event)"
+          >
+            {{ event.reservation.time }}
+            <span class="ellipsis">{{ event.title }}</span>
+          </q-badge>
+          <q-badge
+            :key="index"
+            v-if=" event.title === '已取消預約'"
+            style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
+            class="bg-grey-5"
             :style="badgeStyles(event, 'day')"
             @click.stop.prevent="showEvent(event)"
           >
@@ -290,6 +309,45 @@ export default {
     showEvent (event) {
       this.event = event
       this.displayEvent = true
+    },
+    async cancelReservations (_id, reservation) {
+      console.log(_id)
+      const data = {
+        title: '已取消預約',
+        color: 'lightgrey'
+      }
+      try {
+        await this.api.patch('/Reservations/' + _id, data, {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.$q.dialog({
+          parent: this,
+          title: '成功',
+          message: '取消預約成功'
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+        // this.products.splice(pageIndex, 1)
+      } catch (error) {
+        console.log(error)
+        this.$q.dialog({
+          parent: this,
+          title: '取消預約失敗',
+          message: error.response.data.message
+        }).onOk(() => {
+        // console.log('OK')
+        }).onCancel(() => {
+        // console.log('Cancel')
+        }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+        })
+      }
     }
   },
   async created () {
