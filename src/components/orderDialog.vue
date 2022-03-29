@@ -5,7 +5,7 @@
         <div class="col-4">訂單號碼： {{ orders._id }}</div>
         <div class="col-4">訂購日期： {{ new Date(orders.date).toLocaleString('zh-tw') }}</div>
         <div class="col-4">
-          訂單狀態：<div class="div" v-if="orders.orderStatus === true">已完成</div><div class="div" v-if="orders.orderStatus && cancelStatus === false">待出貨</div><div class="div" v-if="orders.cancelStatus === true">已取消</div>
+          訂單狀態： {{ orders.orderStatus }}
         </div>
       </div>
       <div class="row bg-primary text-white q-py-md">

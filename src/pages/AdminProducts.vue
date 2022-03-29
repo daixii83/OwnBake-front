@@ -24,7 +24,7 @@
             <q-td key="productSell" :props="props">
               {{ props.row.productSell? '上架中' : '未上架' }}
             </q-td>
-            <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td>
+            <!-- <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td> -->
             <!-- <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td> -->
             <q-td key="editOrDelete">
               <div class="row">
@@ -73,7 +73,7 @@ const columns = [
   { name: 'productImage', align: 'center', label: '商品圖片', field: 'productImage', style: 'width: 10px' },
   { name: 'productPrice', align: 'center', label: '價格', field: 'productPrice' },
   { name: 'productSell', align: 'center', label: '上架狀態', field: 'productSell' },
-  { name: 'productDescription', align: 'center', label: '商品說明', field: 'productDescription' },
+  // { name: 'productDescription', align: 'center', label: '商品說明', field: 'productDescription' },
   // { name: 'quantitySold', align: 'center', label: '售出總數', field: 'quantitySold' },
   { name: 'editOrDelete', align: 'center', label: '操作', field: 'editOrDelete' }
 ]

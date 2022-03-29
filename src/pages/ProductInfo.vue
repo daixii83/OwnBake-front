@@ -53,7 +53,7 @@
             </div>
           </div>
           <div align="center" class="col-12 text-h5 subtitle q-pa-xl pa-mobile">商品說明</div>
-          <div class="col-12 text-h6 content" style="white-space: pre"> {{productDescription}} </div>
+          <div class="col-12 text-h6 content" style="white-space: pre" v-html="productDescription"></div>
         </div>
       </div>
     </div>

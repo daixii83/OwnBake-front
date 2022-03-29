@@ -37,7 +37,7 @@
           <q-tab-panel name="AdminOrders">
             <router-view />
           </q-tab-panel>
-          <q-tab-panel name="AdminReservations">
+          <q-tab-panel name="AdminReservations" align="center">
             <router-view />
           </q-tab-panel>
           <!-- <q-tab-panel name="AdminArticles"> -->

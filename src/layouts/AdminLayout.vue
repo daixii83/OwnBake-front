@@ -19,7 +19,7 @@
           -->
           <q-tabs align="center" shrink stretch class="gt-sm">
             <q-route-tab to="/AboutUs" label="關於我們" />
-            <q-route-tab to="/Products" label="商品介紹" />
+            <q-route-tab to="/Products" label="甜點材料包" />
             <q-route-tab to="/Reservation" label="預約體驗" />
             <!-- <q-route-tab to="/Forum" label="討論區" /> -->
             <!-- <q-route-tab to="/ContactUs" label="聯絡我們" /> -->
@@ -56,7 +56,7 @@
 
           <q-item>
             <q-item-section>
-              <q-btn flat to="/Products">產品介紹</q-btn>
+              <q-btn flat to="/Products">甜點材料包</q-btn>
             </q-item-section>
           </q-item>
 
@@ -120,7 +120,7 @@
         <div class="col-md-2">
           <q-card class="bg-dark" flat>
             <q-card-section>
-              <div class="text-subtitle1"><a class="link" href="#/Products">商品介紹</a></div>
+              <div class="text-subtitle1"><a class="link" href="#/Products">甜點材料包</a></div>
               <p>
                 <a class="link" href="#/Products">蛋糕</a> <br>
                 <a class="link" href="#/Products">餅乾</a> <br>

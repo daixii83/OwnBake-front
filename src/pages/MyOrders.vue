@@ -22,9 +22,7 @@
               {{ total(props.row) }}
             </q-td>
             <q-td key="orderStatus" :props="props">
-              <div v-if="props.row.orderStatus || props.row.cancelStatus === false" > 處理中 </div>
-              <div v-if="props.row.orderStatus === true" > 已出貨 </div>
-              <div v-if="props.row.cancelStatus === true" > 已取消 </div>
+              {{ props.row.orderStatus }}
             </q-td>
             <q-td key="productDescription" :props="props">{{ props.row.productDescription }}</q-td>
             <q-td key="quantitySold" :props="props">{{ props.row.quantitySold }}</q-td>
@@ -107,7 +105,7 @@ export default {
     async cancelOrders (_id, order) {
       console.log(_id)
       const data = {
-        cancelStatus: true
+        orderStatus: '已取消'
       }
       try {
         await this.api.patch('/Orders/' + _id, data, {

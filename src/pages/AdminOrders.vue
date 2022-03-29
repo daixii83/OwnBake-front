@@ -15,9 +15,7 @@
               <q-btn size="0.7rem" class="bg-white bubble" @click="orderInfo(props.pageIndex)">查看詳細</q-btn>
             </q-td>
             <q-td key="orderStatus" :props="props">
-              <div v-if="props.row.orderStatus || props.row.cancelStatus === false" > 待處理 </div>
-              <div v-if="props.row.orderStatus === true" > 已完成 </div>
-              <div v-if="props.row.cancelStatus === true" > 已取消 </div>
+              {{ props.row.orderStatus }}
             </q-td>
             <q-td key="orderRecipient" :props="props">{{ props.row.order.recipient }}</q-td>
             <!-- <q-td key="orderTotal" :props="props">{{ total }}</q-td> -->
@@ -98,11 +96,11 @@ export default {
     },
     async completedOrders (_id) {
       console.log(_id)
-      const orderData = {
-        deliveryStatus: true
+      const data = {
+        orderStatus: '已出貨'
       }
       try {
-        await this.api.patch('/orders/' + _id, orderData, {
+        await this.api.patch('/orders/' + _id, data, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
@@ -136,11 +134,11 @@ export default {
     },
     async cancelOrders (_id) {
       console.log(_id)
-      const cancelData = {
-        cancelStatus: true
+      const data = {
+        orderStatus: '已取消'
       }
       try {
-        await this.api.patch('/orders/' + _id, cancelData, {
+        await this.api.patch('/orders/' + _id, data, {
           headers: {
             authorization: 'Bearer ' + this.$store.getters['user/user'].token
           }
@@ -183,7 +181,7 @@ export default {
         this.$q.dialog({
           parent: this,
           title: '成功',
-          message: '刪除成功'
+          message: '刪除訂單成功'
         }).onOk(() => {
         // console.log('OK')
         }).onCancel(() => {
@@ -196,7 +194,7 @@ export default {
         console.log(error)
         this.$q.dialog({
           parent: this,
-          title: '失敗',
+          title: '刪除訂單失敗',
           message: error.response.data.message
         }).onOk(() => {
         // console.log('OK')
