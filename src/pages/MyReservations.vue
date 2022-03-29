@@ -62,7 +62,6 @@
       :short-weekday-label="shortWeekdayLabel"
       :short-month-label="shortMonthLabel"
       @change="onChange"
-      :data="events"
     >
       <template #day="{ timestamp }">
         <template v-for="(event, index) in getEvents(timestamp.date)">
