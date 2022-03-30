@@ -10,8 +10,8 @@
           />
         </template>
 
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="管理者介面" icon="navigation" />
+        <q-breadcrumbs-el to="/Home" label="Home" icon="home" />
+        <q-breadcrumbs-el to="/Admin" label="管理者介面" icon="navigation" />
       </q-breadcrumbs>
       <q-card class="">
         <q-tabs

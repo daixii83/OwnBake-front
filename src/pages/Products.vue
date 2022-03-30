@@ -10,8 +10,8 @@
           />
         </template>
 
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="甜點材料包" icon="widgets" />
+        <q-breadcrumbs-el to="/Home" label="Home" icon="home" />
+        <q-breadcrumbs-el to="/Products" label="甜點材料包" icon="widgets" />
         <q-breadcrumbs-el label="全部商品" icon="navigation" />
       </q-breadcrumbs>
       <q-card>

@@ -10,8 +10,8 @@
           />
         </template>
 
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="會員專區" icon="navigation" />
+        <q-breadcrumbs-el to="/Home" label="Home" icon="home" />
+        <q-breadcrumbs-el to="/Member" label="會員專區" icon="navigation" />
       </q-breadcrumbs>
       <q-card class="">
         <q-tabs

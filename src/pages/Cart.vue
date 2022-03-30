@@ -10,8 +10,8 @@
           />
         </template>
 
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="購物車" icon="navigation" />
+        <q-breadcrumbs-el to="/Home" label="Home" icon="home" />
+        <q-breadcrumbs-el to="/Cart" label="購物車" icon="navigation" />
       </q-breadcrumbs>
       <div class="row">
         <div class="col-md-1"></div>

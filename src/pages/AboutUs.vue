@@ -10,8 +10,8 @@
           />
         </template>
 
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="關於我們" icon="navigation" />
+        <q-breadcrumbs-el to="/Home" label="Home" icon="home" />
+        <q-breadcrumbs-el to="/AboutUs" label="關於我們" icon="navigation" />
       </q-breadcrumbs>
       <div class="row q-pb-xl">
         <div align="center" class="col-md-1"></div>
