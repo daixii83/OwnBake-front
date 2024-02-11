@@ -19,10 +19,18 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     state: {
+      productsUpdateStatus: false
     },
     mutations: {
+      TOGGLE_PRODUCTS_UPDATE_STATUS (state) {
+        // Toggle the status flag
+        state.productsUpdateStatus = !state.productsUpdateStatus
+      }
     },
     actions: {
+      toggleProductsUpdateStatus (context) {
+        context.commit('TOGGLE_PRODUCTS_UPDATE_STATUS')
+      }
     },
     modules: {
       user

@@ -29,6 +29,7 @@
 
 <style lang="sass" scoped>
   .q-img
+    height: 200px
     &__content
       > div
         background: rgba( 0, 0, 0, 0.4)

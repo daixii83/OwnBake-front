@@ -87,6 +87,29 @@ export default {
     }
   },
   methods: {
+    async pageRefresh () {
+      console.log('refresh page')
+      try {
+        const { data } = await this.api.get('/products/all', {
+          headers: {
+            authorization: 'Bearer ' + this.$store.getters['user/user'].token
+          }
+        })
+        this.products = data.result
+      } catch (error) {
+        this.$q.dialog({
+          parent: this,
+          title: '失敗',
+          message: '取得商品失敗'
+        }).onOk(() => {
+          // console.log('OK')
+        }).onCancel(() => {
+          // console.log('Cancel')
+        }).onDismiss(() => {
+          // console.log('I am triggered on both OK and Cancel')
+        })
+      }
+    },
     updateData () {
       // Vuex logics or others
       this.tableKey = 1
@@ -109,11 +132,11 @@ export default {
         // (everything except "component" and "parent" props above):
         // ...more.props...
       }).onOk(() => {
-        console.log('OK')
+        // console.log('OK')
       }).onCancel(() => {
-        console.log('Cancel')
+        // console.log('Cancel')
       }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
+        // console.log('Called on OK or Cancel')
       })
     },
     editProduct (index) {
@@ -136,11 +159,11 @@ export default {
         product: this.form
         // ...more.props...
       }).onOk(() => {
-        console.log('OK')
+        // console.log('OK')
       }).onCancel(() => {
-        console.log('Cancel')
+        // console.log('Cancel')
       }).onDismiss(() => {
-        console.log('Called on OK or Cancel')
+        // console.log('Called on OK or Cancel')
       })
     },
     async deleteProduct (_id) {
@@ -157,7 +180,7 @@ export default {
           message: '刪除成功'
         }).onOk(() => {
         // console.log('OK')
-          this.$forceUpdate()
+          this.pageRefresh()
         }).onCancel(() => {
         // console.log('Cancel')
         }).onDismiss(() => {
@@ -179,27 +202,20 @@ export default {
       }
     }
   },
-  async created () {
-    try {
-      const { data } = await this.api.get('/products/all', {
-        headers: {
-          authorization: 'Bearer ' + this.$store.getters['user/user'].token
-        }
-      })
-      this.products = data.result
-    } catch (error) {
-      this.$q.dialog({
-        parent: this,
-        title: '失敗',
-        message: '取得商品失敗'
-      }).onOk(() => {
-        // console.log('OK')
-      }).onCancel(() => {
-        // console.log('Cancel')
-      }).onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
-      })
+  computed: {
+    productsUpdateStatus () {
+      return this.$store.state.productsUpdateStatus
     }
+  },
+  watch: {
+    productsUpdateStatus (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.pageRefresh()
+      }
+    }
+  },
+  async created () {
+    this.pageRefresh()
   }
 }
 </script>

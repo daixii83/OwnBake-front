@@ -10,7 +10,7 @@
                 ref="input"
                 filled
                 label="請輸入用戶名稱"
-                v-model="form.username"
+                v-model="form.userName"
                 :rules="[ val => val.length >= 4 && val.length <= 20 || '用戶名稱必須介於4-20個字']"
                 lazy-rules
               />
@@ -88,12 +88,12 @@
 </style>
 
 <script>
-// import dialogSuccess from '../components/dialogSuccess.vue'
+import { Dialog } from 'quasar'
 export default {
   data () {
     return {
       form: {
-        username: '',
+        userName: '',
         account: '',
         email: '',
         password: '',
@@ -110,7 +110,6 @@ export default {
   methods: {
     simulateSubmit () {
       this.submitting = true
-
       // Simulating a delay here.
       // When we are done, we reset "submitting"
       // Boolean to false to restore the
@@ -128,31 +127,19 @@ export default {
     async register () {
       try {
         await this.api.post('/users', this.form)
-        this.$q.dialog({
+        Dialog.create({
           // component: dialogSuccess,
           parent: this,
           title: '註冊成功',
-          message: '移至登入頁面'
-        }).onOk(() => {
-        // console.log('OK')
-        }).onCancel(() => {
-        // console.log('Cancel')
-        }).onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
+          message: '將跳轉至登入介面'
         })
         this.$router.push('/Login')
       } catch (error) {
-        this.$q.dialog({
+        Dialog.create({
           // component: dialogSuccess,
           parent: this,
           title: '註冊失敗',
           message: error.response.data.message
-        }).onOk(() => {
-        // console.log('OK')
-        }).onCancel(() => {
-        // console.log('Cancel')
-        }).onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
         })
       }
     }

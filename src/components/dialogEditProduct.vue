@@ -20,15 +20,15 @@
           <div class="row items-center">
             <div align="center" class="col-md-6">
               <img-inputer
-              accept="image/*"
-              v-model="form.productImage"
-              theme="light"
-              size="large"
-              bottomText="點擊或拖曳圖片"
-              hover-text="點擊或拖曳圖片以修改"
-              placeholder="點擊或拖曳選擇圖片"
-              :max-size="1024"
-              exceed-size-text="檔案大小不能超過"
+                accept="image/*"
+                v-model="form.productImage"
+                theme="light"
+                size="large"
+                bottomText="點擊或拖曳圖片"
+                hover-text="點擊或拖曳圖片以修改"
+                placeholder="點擊或拖曳選擇圖片"
+                :max-size="1024"
+                exceed-size-text="檔案大小不能超過"
               />
             </div>
             <div class="col-md-6">
@@ -265,7 +265,10 @@ export default {
       // when QDialog emits "hide" event
       this.$emit('hide')
     },
-
+    updateProduct () {
+      console.log(this.$store)
+      this.$store.dispatch('toggleProductsUpdateStatus')
+    },
     async submitForm (event) {
       event.preventDefault()
       if (!this.state.productName || !this.state.productPrice || !this.state.productCategories) {
@@ -309,7 +312,8 @@ export default {
           this.products[this.form.index] = { ...this.form, image: data.result.image }
           // this.$refs.table.refresh()
         }
-        // then hiding dialog
+        // update product page then hiding dialog
+        this.updateProduct()
         this.hide()
       } catch (error) {
         console.log(error)
