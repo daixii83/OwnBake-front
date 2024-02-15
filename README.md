@@ -2,7 +2,8 @@
 Demo網址 [OwnBake](daixii83.github.io/OwnBake-front/)
 <br><br>
 使用[Render](https://docs.render.com/free)免費方案部屬，伺服器無接收請求超過15分鐘後會休眠，
-重新啟動後需等待伺服器回應請求。
+重新啟動後需等待伺服器回應請求。<br>
+*使用[UptimeRobot](https://uptimerobot.com/)定時發送請求以防止休眠。
 
 ## Install the dependencies
 ```bash
